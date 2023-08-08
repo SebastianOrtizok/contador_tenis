@@ -1,0 +1,30 @@
+* {
+	margin: 0;
+	padding: 0;
+     box-sizing: border-box;
+}
+
+body {
+	background-image: url(../img/blue-tennis-court.jpg);
+	background-size: 95%;
+}
+
+.grid {
+	display: grid;
+	margin: 5rem;
+	grid-template-columns: 1fr 1fr;
+	justify-items: center;
+}
+
+div .muestra_puntos {
+	padding: 1rem;
+	font-size: 2rem;
+	width: 220px;
+	height: 200px;
+	background-color: rgb(198, 255, 177);
+}
+
+button {
+	width: 220px;
+	padding: 2rem;
+}
