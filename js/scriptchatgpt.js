@@ -1,65 +1,123 @@
+const puntos = [0, 15, 30, 40, "Ventaja"];
+
 const jugador1 = {
-    nombre: "nombre",
-    puntos: 0,
-    games: 0,
-    sets: 0,
+  nombre: "",
+  games: 0,
+  sets: 0,
+  ptiebreak: 0,
+  ijugador: 0,
+  servicio: true,
 };
 
 const jugador2 = {
-    nombre: "nombre",
-    puntos: 0,
-    games: 0,
-    sets: 0,
+  nombre: "",
+  games: 0,
+  sets: 0,
+  ptiebreak: 0,
+  ijugador: 0,
+  servicio: false,
 };
 
-let game = false;
-
-function updateDisplay() {
-    document.getElementById("muestra_resultado_punto_1").innerHTML =
-        "puntos: " + jugador1.puntos + "<br>" + "games: " + jugador1.games;
-    document.getElementById("muestra_resultado_punto_2").innerHTML =
-        "puntos: " + jugador2.puntos + "<br>" + "games: " + jugador2.games;
-}
-
-function handlePlayerButtonClick(player) {
-    if (player.puntos === "ventaja") {
-        jugador1.puntos = 0;
-        jugador2.puntos = 0;
-        updateDisplay();
-        player.games++;
-        game = true;
-    } else if (player.puntos === 40 && jugador1.puntos === 40) {
-        player.puntos = "ventaja";
-    } else if (player.puntos !== 30 && player.puntos !== "ventaja" && !game) {
-        player.puntos += 15;
-    } else if (player.puntos === 30 && player.puntos !== "ventaja") {
-        player.puntos += 10;
-    }
-
-    if (jugador1.puntos === "ventaja" && jugador2.puntos === "ventaja") {
-        console.warn("Ambos jugadores en ventaja");
-        jugador1.puntos = 40;
-        jugador2.puntos = 40;
-        updateDisplay();
-    }
-
-    if (player.puntos > 40) {
-        jugador1.puntos = 0;
-        jugador2.puntos = 0;
-        updateDisplay();
-        player.games++;
-        game = true;
-    }
-
-    updateDisplay();
-}
-
+const inputNombreJugador1 = document.getElementById("nombreJugador1");
+const inputNombreJugador2 = document.getElementById("nombreJugador2");
+const btnCargarNombres = document.getElementById("cargarnombres");
 const boton1 = document.getElementById("punto_jugador_1");
-boton1.addEventListener("click", function () {
-    handlePlayerButtonClick(jugador1);
+const boton2 = document.getElementById("punto_jugador_2");
+
+btnCargarNombres.addEventListener("click", function () {
+  jugador1.nombre = inputNombreJugador1.value;
+  jugador2.nombre = inputNombreJugador2.value;
 });
 
-const boton2 = document.getElementById("punto_jugador_2");
-boton2.addEventListener("click", function () {
-    handlePlayerButtonClick(jugador2);
+boton1.addEventListener("click", function () {
+  realizarJugada(jugador1);
 });
+
+boton2.addEventListener("click", function () {
+  realizarJugada(jugador2);
+});
+
+function realizarJugada(jugador) {
+  if (t_iebreak) {
+    tiebreak(jugador);
+  } else {
+    sumagame(jugador);
+    sumapunto(jugador);
+    ventajaiguales(jugador);
+  }
+  mostrar_resultado();
+}
+
+function sumapunto(jugador) {
+  jugador.ijugador += 1;
+}
+
+function sumagame(jugador) {
+  const rival = jugador === jugador1 ? jugador2 : jugador1;
+
+  if ((jugador.ijugador === 3 || jugador.ijugador === 4) && rival.ijugador < 4) {
+    jugador.games += 1;
+    service();
+    jugador.ijugador = -1;
+    rival.ijugador = 0;
+  }
+
+  cambiodelado();
+  sumaset();
+}
+
+function sumaset() {
+  const ganadorSets = jugador1.games === 6 ? jugador1 : jugador2;
+  const perdedorSets = ganadorSets === jugador1 ? jugador2 : jugador1;
+
+  if (ganadorSets.games === 6 && perdedorSets.games < 5) {
+    ganadorSets.sets += 1;
+    reset();
+  }
+
+  if (ganadorSets.games === 6 && perdedorSets.games === 6) {
+    t_iebreak = true;
+  }
+}
+
+function ventajaiguales() {
+  if (jugador1.ijugador === jugador2.ijugador && jugador1.ijugador === 4) {
+    jugador2.ijugador = 3;
+    jugador1.ijugador = 3;
+  }
+}
+
+function tiebreak(jugador) {
+  jugador.ptiebreak += 1;
+  mostrar_resultado();
+
+  const ganador = jugador1.ptiebreak === 7 ? jugador1 : jugador2;
+  const perdedor = ganador === jugador1 ? jugador2 : jugador1;
+
+  if (ganador.ptiebreak === 7 && perdedor.ptiebreak <= 5) {
+    ganador.sets += 1;
+    t_iebreak = false;
+    reset();
+  }
+
+  if (ganador.ptiebreak === perdedor.ptiebreak + 2 && ganador.ptiebreak >= 5 && perdedor.ptiebreak >= 5) {
+    ganador.sets += 1;
+    reset();
+  }
+
+  mostrar_resultado();
+}
+
+function service() {
+  jugador1.servicio = !jugador1.servicio;
+  jugador2.servicio = !jugador2.servicio;
+  document.getElementById("muestra_servicio_1").hidden = jugador1.servicio;
+  document.getElementById("muestra_servicio_2").hidden = jugador2.servicio;
+}
+
+function cambiodelado() {
+  const sumagame = jugador1.games + jugador2.games;
+  const cambioDeLadoElement = document.getElementById("cambio_de_lado");
+
+  cambioDeLadoElement.hidden = sumagame % 2 === 0;
+}

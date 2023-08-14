@@ -7,13 +7,49 @@
 		<title>Contador Tenis</title>
 	</head>
 	<body>
-		<div class="grid">
-            <div class="muestra_puntos" id="muestra_resultado_punto_1">Jugador 1</div>
-            <div class="muestra_puntos" id="muestra_resultado_punto_2">Jugador 2</div>
-			<button class="jugadorunopunto" id="punto_jugador_1">Punto jugador 1</button>
-			<button class="jugadordospunto" id="punto_jugador_2">Punto jugador 2</button>
+		<!-- formulario carga nombre de jugadores -->
+		<div id="formulario_jugadores">
+			<label class="nombreJugador1">Nombre Jugador 1:</label>
+			<input type="text" id="nombreJugador1" />
+			<label class="nombreJugador2">Nombre Jugador 2:</label>
+			<input type="text" id="nombreJugador2" />
+			<button class="jugadorunopunto" id="cargarnombres">Cargar Nombres</button>
 		</div>
+		<!-- Fin formulario carga nombre de jugadores -->
+		<div class="container">
+			<div class="flex">
+				<div class="jugador1">
+					<img
+						class="muestra_puntos"
+						id="muestra_servicio_1"
+						src="img/servicio.jpg"
+						alt="service1 img"
+					/>
+					<div class="muestra_nombre1" id="muestra_nombre_1"></div>
+					<div class="muestra_puntos" id="muestra_resultado_punto_1"></div>
+				</div>
+				<div class="jugador2">
+					<img
+						class="muestra_puntos"
+						id="muestra_servicio_2"
+						src="img/servicio.jpg"
+						alt="service2 img"
+					/>
+					<div class="muestra_nombre1" id="muestra_nombre_2"></div>
+					<div class="muestra_puntos" id="muestra_resultado_punto_2"></div>
+				</div>
+			</div>
+			<div class="botones_puntos">
+				<button class="jugadorunopunto" id="punto_jugador_1">
+					Punto jugador 1
+				</button>
+				<button class="jugadordospunto" id="punto_jugador_2">
+					Punto jugador 2
+				</button>
+			</div>
+		</div>
+		<div class="cambio_de_lado" id="cambio_de_lado"></div>
 
-		<script src="js/script.js"></script>
+		<script src="js/scriptnew.js"></script>
 	</body>
 </html>

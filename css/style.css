@@ -9,22 +9,92 @@ body {
 	background-size: 95%;
 }
 
-.grid {
-	display: grid;
-	margin: 5rem;
-	grid-template-columns: 1fr 1fr;
-	justify-items: center;
+#formulario_jugadores{
+    background-color: rgba(0, 31, 125, 0.228);
+    display: flex;
+    flex-direction: column;
+	border-radius: 10px;
+    width: 50%;
+    margin: 0rem auto;
+    padding: 3rem;
+	align-items: center;
 }
+
+.nombreJugador1 {
+	color: aliceblue;
+}
+
+#nombreJugador1 {
+	width: 50%;
+}
+
+#nombreJugador2 {
+	width: 50%;
+}
+
+.nombreJugador2 {
+	color: aliceblue;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 31, 125, 0.228);
+    margin: 0.2rem auto;
+    width: 50%;
+	border-radius: 10px;
+	padding: 0.5rem;
+}
+
+.jugador1 {
+    display: grid;
+    grid-template-columns: 10% 20% 40%;
+    background-color: rgb(198, 255, 177);
+    align-items: center;
+}
+
+.jugador2 {
+    display: grid;
+    grid-template-columns: 10% 20% 40%;
+    background-color: rgb(198, 255, 177);
+    align-items: center;
+}
+
+.flex {
+	display: flex;
+	flex-direction: column;
+	margin: 1rem;
+	justify-items: center;
+    align-items: stretch;
+}
+
 
 div .muestra_puntos {
 	padding: 1rem;
 	font-size: 2rem;
-	width: 220px;
-	height: 200px;
+	height: auto;
 	background-color: rgb(198, 255, 177);
+}
+
+.flex img {
+	width: 50px;
+	height: 50px;
+
 }
 
 button {
 	width: 220px;
-	padding: 2rem;
+	padding: 0.5rem;
+}
+
+.botones_puntos{
+display: inline;
+margin: 0.5rem 0  0 1rem;
+}
+
+.cambio_de_lado{
+	color: aliceblue;
+	font-size: 5rem;
+	margin-top: 2rem;
+	text-align: center;
 }

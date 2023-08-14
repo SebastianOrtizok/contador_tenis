@@ -1,5 +1,6 @@
 let jugador1 = {
 	nombre: "nombre",
+	servicio: true,
 	puntos: 0,
 	games: 0,
 	sets: 0,
@@ -8,6 +9,7 @@ let jugador1 = {
 
 let jugador2 = {
 	nombre: "nombre",
+	servicio: false,
 	puntos: 0,
 	games: 0,
 	sets: 0,
@@ -15,6 +17,7 @@ let jugador2 = {
 };
 let game = false;
 let t_iebreak = false;
+let servicio = false;
 
 // MOSTRAR EL RESULTADO ****************
 function mostrar_resultado() {
@@ -28,7 +31,9 @@ function mostrar_resultado() {
 		"sets:" +
 		jugador1.sets +
 		"<br>" +
-		jugador1.ptiebreak;
+		jugador1.ptiebreak +
+		"<br>" +
+		jugador1.servicio;
 	document.getElementById("muestra_resultado_punto_2").innerHTML =
 		"puntos: " +
 		jugador2.puntos +
@@ -39,7 +44,9 @@ function mostrar_resultado() {
 		"sets: " +
 		jugador2.sets +
 		"<br>" +
-		jugador2.ptiebreak;
+		jugador2.ptiebreak +
+		"<br>" +
+		jugador2.servicio;
 }
 
 function reset() {
@@ -70,9 +77,7 @@ function tiebreak(jugador) {
 		t_iebreak = false;
 		reset();
 	}
-	// if (jugador1.ptiebreak == jugador2.ptiebreak && jugador1.ptiebreak>=5 && jugador2.ptiebreak>=5) {
-	// 	console.log("set point " + jugador)
-	// }
+
 	if (
 		jugador1.ptiebreak == jugador2.ptiebreak + 2 &&
 		jugador1.ptiebreak >= 5 &&
@@ -82,6 +87,7 @@ function tiebreak(jugador) {
 		reset();
 		console.log("gano el set el jugador1");
 	}
+
 	if (
 		jugador1.ptiebreak + 2 == jugador2.ptiebreak &&
 		jugador1.ptiebreak >= 5 &&
@@ -108,9 +114,9 @@ boton1.addEventListener("click", function () {
 			console.log("estoy dentro de ventaja");
 			jugador2.puntos = 0;
 			jugador1.puntos = 0;
-			mostrar_resultado();
 			game = true;
 			jugador1.games = jugador1.games + 1;
+			mostrar_resultado();
 		}
 
 		if (jugador1.puntos == 40 && jugador2.puntos == 40) {
@@ -132,9 +138,12 @@ boton1.addEventListener("click", function () {
 		if (jugador1.puntos > 40) {
 			jugador1.puntos = 0;
 			jugador2.puntos = 0;
-			mostrar_resultado();
 			jugador1.games = jugador1.games + 1;
+			game = true;
+			mostrar_resultado();
 		}
+
+		// Suma un set si llega a 6 con diferencia de 2
 		if (jugador1.games == 6 && jugador2.games <= 4) {
 			jugador1.sets = jugador1.sets + 1;
 			jugador1.games = 0;
@@ -144,12 +153,18 @@ boton1.addEventListener("click", function () {
 			console.log("tiebreak");
 			t_iebreak = true;
 		}
+
+		// Suma un set si llega a 7 / 5
 		if (jugador1.games == 7 && jugador2.games <= 5) {
 			jugador1.sets = jugador1.sets + 1;
 			jugador1.games = 0;
 			jugador2.games = 0;
 		}
-
+		//servicio
+		if (game) {
+			jugador1.servicio = false;
+			jugador2.servicio = true;
+		}
 		mostrar_resultado();
 	} else {
 		tiebreak(jugador1);
@@ -192,6 +207,7 @@ boton2.addEventListener("click", function () {
 			jugador1.puntos = 0;
 			mostrar_resultado();
 			jugador2.games = jugador2.games + 1;
+			game = true;
 		}
 		if (jugador2.games == 6 && jugador1.games <= 4) {
 			jugador2.sets = jugador2.sets + 1;
@@ -207,10 +223,27 @@ boton2.addEventListener("click", function () {
 			jugador1.games = 0;
 			jugador2.games = 0;
 		}
+		//servicio
+		if (game) {
+			jugador1.servicio = true;
+			jugador2.servicio = false;
+		}
 		mostrar_resultado();
 	} else {
 		tiebreak(jugador2);
 	}
 });
 
-//game ***********
+// Servicio
+// function service() {
+// 	if (servicio) {
+// 		document.getElementById("muestra_servicio_jugador2").innerHTML =
+// 			"la concha de tu madre: ";
+// 		document.getElementById("muestra_servicio_jugador1").style.display = "none";
+// 	}
+// 	else {
+// 		document.getElementById("muestra_servicio_jugador1").innerHTML = "la remil puta: ";
+// 		document.getElementById("muestra_servicio_jugador2").style.display = "none";
+
+// 	}
+// }
