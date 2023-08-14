@@ -50,7 +50,7 @@ body {
 
 .titulos{
 		display: grid;
-		grid-template-columns: 10% 20% 40%;
+		grid-template-columns: 10% 30% 60%;
 		background-color: rgb(198, 255, 177);
 		align-items: center;
 		padding: 0.3rem;
@@ -58,7 +58,7 @@ body {
 
 .jugador1 {
     display: grid;
-    grid-template-columns: 10% 20% 40%;
+	grid-template-columns: 10% 30% 60%;
     background-color: rgb(198, 255, 177);
     align-items: center;
 }
@@ -71,7 +71,7 @@ body {
 
 .jugador2 {
     display: grid;
-    grid-template-columns: 10% 20% 40%;
+	grid-template-columns: 10% 30% 60%;
     background-color: rgb(198, 255, 177);
     align-items: center;
 }
@@ -133,7 +133,7 @@ margin: 0.5rem 0  0 1rem;
 
 
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
 	#formulario_jugadores {
 		width: 100%;
 		margin: 0rem auto;
