@@ -26,6 +26,7 @@ btnCargarNombres.addEventListener("click", function () {
   jugador1.nombre = inputNombreJugador1.value;
   jugador2.nombre = inputNombreJugador2.value;
   document.getElementById("formulario_jugadores").style.visibility = "hidden";
+  mostrar_resultado()
 });
 
 
@@ -41,17 +42,17 @@ function mostrar_resultado(nombreJugador1, nombreJugador2) {
 	document.getElementById("muestra_nombre_1").innerHTML =
 	jugador1.nombre
 		document.getElementById("muestra_resultado_punto_1").innerHTML =
-		puntos[jugador1.ijugador] +  "    " +
+		jugador1.sets 	+"    " +
 		jugador1.games + "    " +
-		jugador1.sets 	+
+		puntos[jugador1.ijugador] +  "    " +
 		jugador1.ptiebreak + "    " 
 		;
 		document.getElementById("muestra_nombre_2").innerHTML =
 		jugador2.nombre
 	document.getElementById("muestra_resultado_punto_2").innerHTML =
-	 puntos[jugador2.ijugador] + "    " +
-		jugador2.games + "    " +
-		jugador2.sets + "    " +
+	jugador2.sets + "    " +
+	jugador2.games + "    " +
+	puntos[jugador2.ijugador] + "    " +
 		jugador2.ptiebreak ;
 }
 
@@ -105,10 +106,7 @@ boton2.addEventListener("click", function () {
 // suma punto
 function sumapunto(jugador) {
 	jugador.ijugador+=1
-	console.log( "el punto lo gano: " )
-
-	}
-
+}
 
 
 //  function Sumar games
@@ -132,7 +130,6 @@ function sumagame() {
 	}
 	cambiodelado()
 	sumaset()
-
 }
 
 // Función suma SET
@@ -222,10 +219,8 @@ function service() {
 
 function cambiodelado(){
 	let sumagame=jugador1.games+jugador2.games
-	console.log(sumagame)
 	document.getElementById("cambio_de_lado").hidden=true
 	if(sumagame  % 2 !== 0){
-		console.log("estoy adentro")
 		document.getElementById("cambio_de_lado").hidden=false
 		document.getElementById("cambio_de_lado").innerHTML= "Cambio de lado"
 	}

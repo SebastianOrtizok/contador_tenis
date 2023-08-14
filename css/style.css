@@ -16,7 +16,7 @@ body {
 	border-radius: 10px;
     width: 50%;
     margin: 0rem auto;
-    padding: 3rem;
+    padding: 1rem;
 	align-items: center;
 }
 
@@ -25,10 +25,12 @@ body {
 }
 
 #nombreJugador1 {
+	padding: 0.2rem;
 	width: 50%;
 }
 
 #nombreJugador2 {
+	padding: 0.2rem;
 	width: 50%;
 }
 
@@ -46,11 +48,25 @@ body {
 	padding: 0.5rem;
 }
 
+.titulos{
+		display: grid;
+		grid-template-columns: 10% 20% 40%;
+		background-color: rgb(198, 255, 177);
+		align-items: center;
+		padding: 0.3rem;
+}
+
 .jugador1 {
     display: grid;
     grid-template-columns: 10% 20% 40%;
     background-color: rgb(198, 255, 177);
     align-items: center;
+}
+#muestra_nombre_1{
+    background-color: rgba(255, 255, 255, 0.501);
+}
+#muestra_nombre_2{
+    background-color: rgba(255, 255, 255, 0.502);
 }
 
 .jugador2 {
@@ -92,9 +108,53 @@ display: inline;
 margin: 0.5rem 0  0 1rem;
 }
 
+@keyframes desvanecer {
+	0% {
+	  opacity: 1;
+	}
+	100% {
+	  opacity: 0;
+	  display: none;
+	}
+  }
+
 .cambio_de_lado{
+	position: fixed;
+	top: 10px;
+	left: auto;
+	right: auto;
 	color: aliceblue;
 	font-size: 5rem;
 	margin-top: 2rem;
 	text-align: center;
+	animation: desvanecer 3s linear 3s forwards;
+}
+
+
+
+
+@media only screen and (max-width: 600px) {
+	#formulario_jugadores {
+		width: 100%;
+		margin: 0rem auto;
+		padding: 0.5 rem;
+		align-items: center;
+	}
+	#nombreJugador1 {
+		width: 100%;
+		background-color: rgb(198, 255, 177);
+	}
+	#nombreJugador2 {
+		width: 100%;
+		background-color: rgb(198, 255, 177);
+	}
+	.container {
+		margin: 0.2rem auto;
+		width: 100%;
+		border-radius: 10px;
+		padding: 0.5rem;
+	}
+	.flex {
+		margin: 0.3rem;
+	}
 }
