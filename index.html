@@ -13,6 +13,21 @@
 			<input type="text" id="nombreJugador1" />
 			<label class="nombreJugador2">Nombre Jugador 2:</label>
 			<input type="text" id="nombreJugador2" />
+			<label class="servicio">Quien saca?</label>
+			<div class="servicio sorteo">
+				<input type="radio" id="saca1" name="jugadorSaca" value="jugador1" />
+				<label for="saca1">Jugador 1</label>
+			</div>
+			<div class="servicio sorteo">
+				<input type="radio" id="saca2" name="jugadorSaca" value="jugador2" />
+				<label for="saca2">Jugador 2</label>
+			</div>
+			<div class="sets">
+				<input type="radio" id="sets3" name="sets" value="3" />
+				<label for="saca2">3 sets</label>
+				<input type="radio" id="sets5" name="sets" value="5" />
+				<label for="saca2">5 sets</label>
+			</div>
 			<button class="jugadorunopunto" id="cargarnombres">Cargar Nombres</button>
 		</div>
 		<!-- Fin formulario carga nombre de jugadores -->
@@ -21,8 +36,10 @@
 				<!-- Titulos -->
 				<div class="titulos">
 					<p>Serv</p>
-					<div class="tit_nombre"> Nombre</div>
-					<div class="tit_puntos">Set Game Puntos</div>
+					<div class="tit_nombre">Nombre</div>
+					<div class="tit_set">Set</div>
+					<div class="tit_puntos">Game Puntos</div>
+					<div class="tit_tiebreak">TB</div>
 				</div>
 				<!-- fin titulos -->
 				<div class="jugador1">
@@ -32,8 +49,11 @@
 						src="img/servicio.jpg"
 						alt="service1 img"
 					/>
-					<div class="muestra_nombre1" id="muestra_nombre_1"></div>
-					<div class="muestra_puntos" id="muestra_resultado_punto_1"></div>
+					<div class="muestra_nombre" id="muestra_nombre_1"></div>
+					<div class="muesta_set" id="muestra_set_jugador1"></div>
+					<div class="muestra_puntos" id="muestra_resultado_punto_1">
+					</div>
+						<div class="muesta_tiebreak" id="muestra_tiebreak_1"></div>	
 				</div>
 				<div class="jugador2">
 					<img
@@ -42,8 +62,10 @@
 						src="img/servicio.jpg"
 						alt="service2 img"
 					/>
-					<div class="muestra_nombre1" id="muestra_nombre_2"></div>
+					<div class="muestra_nombre" id="muestra_nombre_2"></div>
+					<div class="muesta_set" id="muestra_set_jugador2"></div>
 					<div class="muestra_puntos" id="muestra_resultado_punto_2"></div>
+					<div class="muesta_tiebreak" id="muestra_tiebreak_2">0</div>
 				</div>
 			</div>
 			<div class="botones_puntos">
@@ -55,7 +77,7 @@
 				</button>
 			</div>
 		</div>
-		<div class="cambio_de_lado" id="cambio_de_lado"></div>
+		<div class="informacion" id="informacion"></div>
 
 		<script src="js/scriptnew.js"></script>
 	</body>

@@ -10,12 +10,12 @@ body {
 }
 
 #formulario_jugadores{
-    background-color: rgba(0, 31, 125, 0.228);
+    background-color: rgba(0, 31, 125, 0.645);
     display: flex;
     flex-direction: column;
 	border-radius: 10px;
     width: 50%;
-    margin: 0rem auto;
+    margin: 0.3rem auto 0 auto;
     padding: 1rem;
 	align-items: center;
 }
@@ -38,10 +38,20 @@ body {
 	color: aliceblue;
 }
 
+.servicio{
+	color: aliceblue;
+	padding:0.3rem;
+}
+
+.sets{
+	color: aliceblue;
+	padding:0.3rem;
+}
+
 .container {
     display: flex;
     flex-direction: column;
-    background-color: rgba(0, 31, 125, 0.228);
+    background-color: rgba(0, 31, 125, 0.681);
     margin: 0.2rem auto;
     width: 50%;
 	border-radius: 10px;
@@ -50,7 +60,7 @@ body {
 
 .titulos{
 		display: grid;
-		grid-template-columns: 10% 30% 60%;
+		grid-template-columns: 10% 25% 20% 35% 10%;
 		background-color: rgb(198, 255, 177);
 		align-items: center;
 		padding: 0.3rem;
@@ -58,10 +68,15 @@ body {
 
 .jugador1 {
     display: grid;
-	grid-template-columns: 10% 30% 60%;
+	grid-template-columns: 10% 25% 20% 35% 10%;
     background-color: rgb(198, 255, 177);
     align-items: center;
 }
+
+.muestra_nombre {
+	font-size: 1.5rem;
+}
+
 #muestra_nombre_1{
     background-color: rgba(255, 255, 255, 0.501);
 }
@@ -71,7 +86,7 @@ body {
 
 .jugador2 {
     display: grid;
-	grid-template-columns: 10% 30% 60%;
+	grid-template-columns: 10% 25% 20% 35% 10%;
     background-color: rgb(198, 255, 177);
     align-items: center;
 }
@@ -84,6 +99,13 @@ body {
     align-items: stretch;
 }
 
+
+.muesta_set{
+	color:red;
+	font-size: 1.5rem;
+	padding: 0.2rem;
+    background-color: rgba(0, 31, 125, 0.366);
+}
 
 div .muestra_puntos {
 	padding: 1rem;
@@ -118,22 +140,24 @@ margin: 0.5rem 0  0 1rem;
 	}
   }
 
-.cambio_de_lado{
+.informacion{
 	position: fixed;
 	top: 10px;
-	left: auto;
-	right: auto;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: rgba(0, 31, 125, 0.681);
+	border-radius: 10px;
+	padding: 0.5rem;
 	color: aliceblue;
-	font-size: 5rem;
+	font-size: 4rem;
 	margin-top: 2rem;
-	text-align: center;
-	animation: desvanecer 3s linear 3s forwards;
+	animation: desvanecer 2s linear 2s forwards;
 }
 
 
 
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 900px) {
 	#formulario_jugadores {
 		width: 100%;
 		margin: 0rem auto;
