@@ -72,9 +72,8 @@ boton1.addEventListener("click", function () {
 	if (t_iebreak) {
 		tiebreak(jugador);
 	} else {
-		sumagame(jugador);
+		// sumagame(jugador);
 		sumapunto(jugador);
-		ventajaiguales(jugador);
 	}
 	mostrar_resultado();
 });
@@ -86,25 +85,29 @@ boton2.addEventListener("click", function () {
 	if (t_iebreak) {
 		tiebreak(jugador);
 	} else {
-		sumagame(jugador);
 		sumapunto(jugador);
-		ventajaiguales(jugador);
 	}
 	mostrar_resultado();
 });
 
 // suma punto
 function sumapunto(jugador) {
+	sumagame(jugador);
 	jugador.ijugador += 1;
+	ventajaiguales(jugador);
+	setpoint()
+	// setpoint();
 }
 
 //  function Sumar games
-function sumagame() {
+function sumagame(jugador) {
+	console.log(jugador.ijugador)
 	if (
 		(jugador1.ijugador == 3 && jugador2.ijugador < 3 && jugador == jugador1) ||
 		(jugador1.ijugador == 4 && jugador2.ijugador < 4 && jugador == jugador1)
 	) {
 		jugador1.games += 1;
+		cambiodelado();
 		service();
 		jugador1.ijugador = -1;
 		jugador2.ijugador = 0;
@@ -115,17 +118,17 @@ function sumagame() {
 		(jugador2.ijugador == 4 && jugador1.ijugador < 4 && jugador == jugador2)
 	) {
 		jugador2.games += 1;
+		cambiodelado();
 		service();
 		jugador2.ijugador = -1;
 		jugador1.ijugador = 0;
 	}
-	cambiodelado();
 	sumaset();
 }
 
 // Función suma SET
 function sumaset() {
-	if (jugador1.games == 6 && jugador2.games < 5) {
+	if (jugador1.games == 6 && jugador2.games < 5 || jugador1.games == 7 && jugador2.games == 5) {
 		jugador1.sets += 1;
 		jugador1.set[nroset] = jugador1.games;
 		jugador2.set[nroset] = jugador2.games;
@@ -133,7 +136,7 @@ function sumaset() {
 		match();
 		reset();
 	}
-	if (jugador2.games == 6 && jugador1.games < 5) {
+	if (jugador2.games == 6 && jugador1.games < 5 || jugador2.games == 7 && jugador1.games == 5) {
 		jugador2.sets += 1;
 		jugador1.set[nroset] = jugador1.games;
 		jugador2.set[nroset] = jugador2.games;
@@ -148,12 +151,8 @@ function sumaset() {
 
 //función match
 function match() {
-	console.log("cantidad de sets: " + cantSets);
-	console.log("cantidad de sets: " + jugador1.sets);
 	if (cantSets == 3 && jugador.sets == 2) {
-		document.getElementById("informacion").hidden = false;
-		document.getElementById("informacion").innerHTML =
-			"Ganador del juego: " + jugador.nombre;
+		mostrarYDesaparecer("Ganador del juego: ")
 		document.getElementById("punto_jugador_1").hidden = true;
 		document.getElementById("punto_jugador_2").hidden = true;
 	}
@@ -162,19 +161,15 @@ function match() {
 		(jugador1.sets == jugador2.sets + 2 && jugador2.sets != 0) ||
 		(jugador1.sets == 5 && jugador2.sets == 4)
 	) {
-		document.getElementById("informacion").hidden = false;
-		document.getElementById("informacion").innerHTML =
-			"Ganador del juego: " + jugador1.nombre;
+		mostrarYDesaparecer("Ganador del juego: ")
 		document.getElementById("punto_jugador_1").hidden = true;
 		document.getElementById("punto_jugador_2").hidden = true;
 	} else if (
 		(cantSets == 5 && jugador2.sets == 3 && jugador1.sets == 0) ||
-		(jugador2.sets == jugador1.sets + 2 && jugador2.sets != 0)  ||
+		(jugador2.sets == jugador1.sets + 2 && jugador2.sets != 0) ||
 		(jugador2.sets == 5 && jugador1.sets == 4)
 	) {
-		document.getElementById("informacion").hidden = false;
-		document.getElementById("informacion").innerHTML =
-			"Ganador del juego: " + jugador2.nombre;
+		mostrarYDesaparecer("Ganador del juego: ")
 		document.getElementById("punto_jugador_1").hidden = true;
 		document.getElementById("punto_jugador_2").hidden = true;
 	}
@@ -192,6 +187,8 @@ function ventajaiguales() {
 function tiebreak() {
 	jugador.ptiebreak = jugador.ptiebreak + 1;
 	mostrar_resultado();
+	setpoint();
+
 	if (jugador1.ptiebreak == 7 && jugador2.ptiebreak <= 5) {
 		console.log("jugador 1 gana el tiebreak");
 		jugador1.sets = jugador1.sets + 1;
@@ -258,26 +255,62 @@ function service() {
 	}
 }
 
+function mostrarYDesaparecer(informacion,nombre) {
+    // Muestra el contenido en el elemento
+    document.getElementById("informacion").innerHTML = informacion + nombre;
+
+    // Después de 2 segundos, borra el contenido del elemento
+    setTimeout(function() {
+		document.getElementById("informacion").hidden = false;
+        document.getElementById("informacion").innerHTML = "";
+    }, 2000); // 2000 milisegundos = 2 segundos
+}
+
+function setpoint() {
+
+	if (
+		jugador1.games >= 5 &&
+		jugador2.games < jugador1.games &&
+		jugador1.ijugador == 3 &&
+		jugador2.ijugador < jugador1.ijugador || jugador1.ptiebreak >= 6 && jugador2.ptiebreak < jugador1.ptiebreak
+	) {
+		if (cantSets == 3 && jugador1.sets ==1 || cantSets == 5 && jugador1.sets ==2) {
+			mostrarYDesaparecer("Match Point: ",jugador1.nombre)
+		}
+		mostrarYDesaparecer("Set point ",jugador1.nombre )
+	}
+	if (
+		jugador2.games >= 5 &&
+		jugador1.games < jugador2.games &&
+		jugador2.ijugador == 3 &&
+		jugador1.ijugador < jugador2.ijugador || jugador2.ptiebreak >= 6 && jugador1.ptiebreak < jugador2.ptiebreak
+	) {
+		if (cantSets == 3 && jugador2.sets ==1 || cantSets == 5 && jugador2.sets ==2) {
+			mostrarYDesaparecer("Match Point: ",jugador2.nombre)
+		}
+		else{
+			mostrarYDesaparecer("Set point ",jugador2.nombre )
+		}
+	}
+}
+
+
+
 function cambiodelado() {
 	let sumagame = jugador1.games + jugador2.games;
 	let sumaptiebreak = jugador1.ptiebreak + jugador2.ptiebreak;
-	// console.log("suma puntos games " + sumagame)
-	// console.log("suma puntos tiebreak " + sumaptiebreak)
-	document.getElementById("informacion").hidden = true;
+
 	if (sumagame % 2 !== 0 || (sumaptiebreak % 6 == 0 && t_iebreak)) {
-		document.getElementById("informacion").hidden = false;
-		document.getElementById("informacion").innerHTML = "Cambio de lado";
+		mostrarYDesaparecer("Cambio de lado", "")
 	}
 }
 
 // MOSTRAR EL RESULTADO ****************
 
-function mostrar_resultado(nombreJugador1, nombreJugador2) {
+function mostrar_resultado() {
 	document.getElementById("muestra_nombre_1").innerHTML = jugador1.nombre;
-	document.getElementById("muestra_tiebreak_1").innerHTML =
-	jugador1.ptiebreak;
-	document.getElementById("muestra_tiebreak_2").innerHTML =
-	jugador2.ptiebreak;
+	document.getElementById("muestra_tiebreak_1").innerHTML = jugador1.ptiebreak;
+	document.getElementById("muestra_tiebreak_2").innerHTML = jugador2.ptiebreak;
 	if (cantSets == 3) {
 		//jugador 1 a 3 sets
 		document.getElementById("muestra_set_jugador1").innerHTML =

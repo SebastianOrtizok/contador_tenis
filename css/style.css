@@ -60,21 +60,27 @@ body {
 
 .titulos{
 		display: grid;
-		grid-template-columns: 10% 25% 20% 35% 10%;
+		grid-template-columns: 10% 25% 30% 25% 10%;
 		background-color: rgb(198, 255, 177);
 		align-items: center;
 		padding: 0.3rem;
 }
+.tit_servicio{
+	text-align: center;
+}
 
 .jugador1 {
     display: grid;
-	grid-template-columns: 10% 25% 20% 35% 10%;
+	grid-template-columns: 10% 25% 30% 25% 10%;
     background-color: rgb(198, 255, 177);
     align-items: center;
 }
 
 .muestra_nombre {
 	font-size: 1.5rem;
+	overflow: hidden;
+    white-space: nowrap;
+	margin: 0.5rem;
 }
 
 #muestra_nombre_1{
@@ -86,7 +92,7 @@ body {
 
 .jugador2 {
     display: grid;
-	grid-template-columns: 10% 25% 20% 35% 10%;
+	grid-template-columns: 10% 25% 30% 25% 10%;
     background-color: rgb(198, 255, 177);
     align-items: center;
 }
@@ -100,9 +106,9 @@ body {
 }
 
 
-.muesta_set{
+.muestra_set{
 	color:red;
-	font-size: 1.5rem;
+	font-size: 1rem;
 	padding: 0.2rem;
     background-color: rgba(0, 31, 125, 0.366);
 }
@@ -117,7 +123,6 @@ div .muestra_puntos {
 .flex img {
 	width: 50px;
 	height: 50px;
-
 }
 
 button {
@@ -130,15 +135,6 @@ display: inline;
 margin: 0.5rem 0  0 1rem;
 }
 
-@keyframes desvanecer {
-	0% {
-	  opacity: 1;
-	}
-	100% {
-	  opacity: 0;
-	  display: none;
-	}
-  }
 
 .informacion{
 	position: fixed;
@@ -151,8 +147,16 @@ margin: 0.5rem 0  0 1rem;
 	color: aliceblue;
 	font-size: 4rem;
 	margin-top: 2rem;
-	animation: desvanecer 2s linear 2s forwards;
+	/* animation: desvanecer 3s linear 3s forwards; */
 }
+/* @keyframes desvanecer {
+	0% {
+	  opacity: 1;
+	}
+	100% {
+	  opacity: 0;
+	}
+  } */
 
 
 
@@ -176,9 +180,21 @@ margin: 0.5rem 0  0 1rem;
 		margin: 0.2rem auto;
 		width: 100%;
 		border-radius: 10px;
-		padding: 0.5rem;
+		padding: 0rem;
 	}
 	.flex {
 		margin: 0.3rem;
+	}
+	div .muestra_puntos {
+
+		font-size: 1.5rem;
+		height: auto;
+		background-color: rgb(198, 255, 177);
+	}
+	.flex img {
+		width: 25px;
+		height: 25px;
+		padding: 0px;
+		margin: auto;
 	}
 }
