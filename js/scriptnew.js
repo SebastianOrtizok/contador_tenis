@@ -54,6 +54,13 @@ let jugador = "";
 let t_iebreak = false;
 let servicio = "";
 let nroset = 0;
+const gameSetAndMatch = new Audio('/audio/game-set-and-match-umpi.m4a');
+const audiotiebreak = new Audio('/audio/tie-break.m4a');
+const audiogame = new Audio('/audio/game.m4a');
+
+function reproducirAudio(archivo) {
+	archivo.play();
+  }
 
 function reset() {
 	jugador1.games = 0;
@@ -107,6 +114,7 @@ function sumagame(jugador) {
 		(jugador1.ijugador == 4 && jugador2.ijugador < 4 && jugador == jugador1)
 	) {
 		jugador1.games += 1;
+		reproducirAudio(audiogame)
 		cambiodelado();
 		service();
 		jugador1.ijugador = -1;
@@ -118,6 +126,7 @@ function sumagame(jugador) {
 		(jugador2.ijugador == 4 && jugador1.ijugador < 4 && jugador == jugador2)
 	) {
 		jugador2.games += 1;
+		reproducirAudio(audiogame)
 		cambiodelado();
 		service();
 		jugador2.ijugador = -1;
@@ -145,6 +154,7 @@ function sumaset() {
 		reset();
 	}
 	if (jugador1.games == 6 && jugador2.games == 6) {
+		reproducirAudio(audiotiebreak)
 		t_iebreak = true;
 	}
 }
@@ -152,7 +162,8 @@ function sumaset() {
 //función match
 function match() {
 	if (cantSets == 3 && jugador.sets == 2) {
-		mostrarYDesaparecer("Ganador del juego: ")
+		reproducirAudio(gameSetAndMatch)
+		mostrarYDesaparecer("Ganador del juego: ", jugador1.nombre)
 		document.getElementById("punto_jugador_1").hidden = true;
 		document.getElementById("punto_jugador_2").hidden = true;
 	}
@@ -161,15 +172,17 @@ function match() {
 		(jugador1.sets == jugador2.sets + 2 && jugador2.sets != 0) ||
 		(jugador1.sets == 5 && jugador2.sets == 4)
 	) {
-		mostrarYDesaparecer("Ganador del juego: ")
+		reproducirAudio(gameSetAndMatch)
+		mostrarYDesaparecer("Ganador del juego: ", jugador1.nombre)
 		document.getElementById("punto_jugador_1").hidden = true;
 		document.getElementById("punto_jugador_2").hidden = true;
 	} else if (
 		(cantSets == 5 && jugador2.sets == 3 && jugador1.sets == 0) ||
-		(jugador2.sets == jugador1.sets + 2 && jugador2.sets != 0) ||
+		(jugador2.sets == jugador1.sets + 2 && jugador1.sets != 0) ||
 		(jugador2.sets == 5 && jugador1.sets == 4)
 	) {
-		mostrarYDesaparecer("Ganador del juego: ")
+		reproducirAudio(gameSetAndMatch)
+		mostrarYDesaparecer("Ganador del juego: ", jugador2.nombre)
 		document.getElementById("punto_jugador_1").hidden = true;
 		document.getElementById("punto_jugador_2").hidden = true;
 	}
@@ -192,7 +205,8 @@ function tiebreak() {
 	if (jugador1.ptiebreak == 7 && jugador2.ptiebreak <= 5) {
 		console.log("jugador 1 gana el tiebreak");
 		jugador1.sets = jugador1.sets + 1;
-		jugador1.set[nroset] = jugador1.games;
+		jugador1.set[nroset] = jugador1.games+1;
+		reproducirAudio(audiogame)
 		jugador2.set[nroset] = jugador2.games;
 		nroset += 1;
 		t_iebreak = false;
@@ -201,7 +215,8 @@ function tiebreak() {
 	if (jugador2.ptiebreak == 7 && jugador1.ptiebreak <= 5) {
 		console.log("jugador 2 gana el tiebreak");
 		jugador1.set[nroset] = jugador1.games;
-		jugador2.set[nroset] = jugador2.games;
+		jugador2.set[nroset] = jugador2.games+1;
+		reproducirAudio(audiogame)
 		nroset += 1;
 		jugador2.sets = jugador2.sets + 1;
 		t_iebreak = false;
@@ -213,10 +228,13 @@ function tiebreak() {
 		jugador1.ptiebreak >= 5 &&
 		jugador2.ptiebreak >= 5
 	) {
-		jugador1.set[nroset] = jugador1.games;
+		jugador1.set[nroset] = jugador1.games+1;
+		reproducirAudio(audiogame)
 		jugador2.set[nroset] = jugador2.games;
 		nroset += 1;
 		jugador1.sets = jugador1.sets + 1;
+		game = true;
+		t_iebreak = false;
 		reset();
 		console.log("gano el set el jugador1");
 	}
@@ -228,7 +246,8 @@ function tiebreak() {
 	) {
 		jugador1.sets = jugador1.sets + 1;
 		jugador1.set[nroset] = jugador1.games;
-		jugador2.set[nroset] = jugador2.games;
+		jugador2.set[nroset] = jugador2.games+1;
+		reproducirAudio(audiogame)
 		nroset += 1;
 		jugador2.sets = jugador2.sets + 1;
 		game = true;
@@ -276,8 +295,9 @@ function setpoint() {
 	) {
 		if (cantSets == 3 && jugador1.sets ==1 || cantSets == 5 && jugador1.sets ==2) {
 			mostrarYDesaparecer("Match Point: ",jugador1.nombre)
+		}		else{
+			mostrarYDesaparecer("Set point ",jugador1.nombre )
 		}
-		mostrarYDesaparecer("Set point ",jugador1.nombre )
 	}
 	if (
 		jugador2.games >= 5 &&
