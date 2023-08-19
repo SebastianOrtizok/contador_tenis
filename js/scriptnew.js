@@ -54,9 +54,9 @@ let jugador = "";
 let t_iebreak = false;
 let servicio = "";
 let nroset = 0;
-const gameSetAndMatch = new Audio('/audio/game-set-and-match-umpi.m4a');
-const audiotiebreak = new Audio('/audio/tie-break.m4a');
-const audiogame = new Audio('/audio/game.m4a');
+const gameSetAndMatch = new Audio('../audio/game-set-and-match-umpi.m4a');
+const audiotiebreak = new Audio('../audio/tie-break.m4a');
+const audiogame = new Audio('../audio/game.m4a');
 
 function reproducirAudio(archivo) {
 	archivo.play();
@@ -162,8 +162,8 @@ function sumaset() {
 //función match
 function match() {
 	if (cantSets == 3 && jugador.sets == 2) {
-		reproducirAudio(gameSetAndMatch)
 		mostrarYDesaparecer("Ganador del juego: ", jugador1.nombre)
+		reproducirAudio(gameSetAndMatch)
 		document.getElementById("punto_jugador_1").hidden = true;
 		document.getElementById("punto_jugador_2").hidden = true;
 	}
@@ -172,8 +172,8 @@ function match() {
 		(jugador1.sets == jugador2.sets + 2 && jugador2.sets != 0) ||
 		(jugador1.sets == 5 && jugador2.sets == 4)
 	) {
-		reproducirAudio(gameSetAndMatch)
 		mostrarYDesaparecer("Ganador del juego: ", jugador1.nombre)
+		reproducirAudio(gameSetAndMatch)
 		document.getElementById("punto_jugador_1").hidden = true;
 		document.getElementById("punto_jugador_2").hidden = true;
 	} else if (
@@ -181,8 +181,8 @@ function match() {
 		(jugador2.sets == jugador1.sets + 2 && jugador1.sets != 0) ||
 		(jugador2.sets == 5 && jugador1.sets == 4)
 	) {
-		reproducirAudio(gameSetAndMatch)
 		mostrarYDesaparecer("Ganador del juego: ", jugador2.nombre)
+		reproducirAudio(gameSetAndMatch)
 		document.getElementById("punto_jugador_1").hidden = true;
 		document.getElementById("punto_jugador_2").hidden = true;
 	}
@@ -255,6 +255,7 @@ function tiebreak() {
 		reset();
 		console.log("gano el set el jugador2");
 	}
+	match()
 	cambiodelado();
 	mostrar_resultado();
 }
