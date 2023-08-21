@@ -54,13 +54,13 @@ let jugador = "";
 let t_iebreak = false;
 let servicio = "";
 let nroset = 0;
-const gameSetAndMatch = new Audio('../audio/game-set-and-match-umpi.m4a');
-const audiotiebreak = new Audio('../audio/tie-break.m4a');
-const audiogame = new Audio('../audio/game.m4a');
+const gameSetAndMatch = new Audio("../audio/game-set-and-match-umpi.ogg");
+const audiotiebreak = new Audio("../audio/tie-break.ogg");
+const audiogame = new Audio("../audio/game.ogg");
 
 function reproducirAudio(archivo) {
 	archivo.play();
-  }
+}
 
 function reset() {
 	jugador1.games = 0;
@@ -102,19 +102,19 @@ function sumapunto(jugador) {
 	sumagame(jugador);
 	jugador.ijugador += 1;
 	ventajaiguales(jugador);
-	setpoint()
+	setpoint();
 	// setpoint();
 }
 
 //  function Sumar games
 function sumagame(jugador) {
-	console.log(jugador.ijugador)
+	console.log(jugador.ijugador);
 	if (
 		(jugador1.ijugador == 3 && jugador2.ijugador < 3 && jugador == jugador1) ||
 		(jugador1.ijugador == 4 && jugador2.ijugador < 4 && jugador == jugador1)
 	) {
 		jugador1.games += 1;
-		reproducirAudio(audiogame)
+		reproducirAudio(audiogame);
 		cambiodelado();
 		service();
 		jugador1.ijugador = -1;
@@ -126,7 +126,7 @@ function sumagame(jugador) {
 		(jugador2.ijugador == 4 && jugador1.ijugador < 4 && jugador == jugador2)
 	) {
 		jugador2.games += 1;
-		reproducirAudio(audiogame)
+		reproducirAudio(audiogame);
 		cambiodelado();
 		service();
 		jugador2.ijugador = -1;
@@ -137,7 +137,10 @@ function sumagame(jugador) {
 
 // Función suma SET
 function sumaset() {
-	if (jugador1.games == 6 && jugador2.games < 5 || jugador1.games == 7 && jugador2.games == 5) {
+	if (
+		(jugador1.games == 6 && jugador2.games < 5) ||
+		(jugador1.games == 7 && jugador2.games == 5)
+	) {
 		jugador1.sets += 1;
 		jugador1.set[nroset] = jugador1.games;
 		jugador2.set[nroset] = jugador2.games;
@@ -145,7 +148,10 @@ function sumaset() {
 		match();
 		reset();
 	}
-	if (jugador2.games == 6 && jugador1.games < 5 || jugador2.games == 7 && jugador1.games == 5) {
+	if (
+		(jugador2.games == 6 && jugador1.games < 5) ||
+		(jugador2.games == 7 && jugador1.games == 5)
+	) {
 		jugador2.sets += 1;
 		jugador1.set[nroset] = jugador1.games;
 		jugador2.set[nroset] = jugador2.games;
@@ -154,7 +160,7 @@ function sumaset() {
 		reset();
 	}
 	if (jugador1.games == 6 && jugador2.games == 6) {
-		reproducirAudio(audiotiebreak)
+		reproducirAudio(audiotiebreak);
 		t_iebreak = true;
 	}
 }
@@ -162,8 +168,8 @@ function sumaset() {
 //función match
 function match() {
 	if (cantSets == 3 && jugador.sets == 2) {
-		mostrarYDesaparecer("Ganador del juego: ", jugador1.nombre)
-		reproducirAudio(gameSetAndMatch)
+		mostrarYDesaparecer("Ganador del juego: ", jugador1.nombre);
+		reproducirAudio(gameSetAndMatch);
 		document.getElementById("punto_jugador_1").hidden = true;
 		document.getElementById("punto_jugador_2").hidden = true;
 	}
@@ -172,8 +178,8 @@ function match() {
 		(jugador1.sets == jugador2.sets + 2 && jugador2.sets != 0) ||
 		(jugador1.sets == 5 && jugador2.sets == 4)
 	) {
-		mostrarYDesaparecer("Ganador del juego: ", jugador1.nombre)
-		reproducirAudio(gameSetAndMatch)
+		mostrarYDesaparecer("Ganador del juego: ", jugador1.nombre);
+		reproducirAudio(gameSetAndMatch);
 		document.getElementById("punto_jugador_1").hidden = true;
 		document.getElementById("punto_jugador_2").hidden = true;
 	} else if (
@@ -181,8 +187,8 @@ function match() {
 		(jugador2.sets == jugador1.sets + 2 && jugador1.sets != 0) ||
 		(jugador2.sets == 5 && jugador1.sets == 4)
 	) {
-		mostrarYDesaparecer("Ganador del juego: ", jugador2.nombre)
-		reproducirAudio(gameSetAndMatch)
+		mostrarYDesaparecer("Ganador del juego: ", jugador2.nombre);
+		reproducirAudio(gameSetAndMatch);
 		document.getElementById("punto_jugador_1").hidden = true;
 		document.getElementById("punto_jugador_2").hidden = true;
 	}
@@ -205,8 +211,8 @@ function tiebreak() {
 	if (jugador1.ptiebreak == 7 && jugador2.ptiebreak <= 5) {
 		console.log("jugador 1 gana el tiebreak");
 		jugador1.sets = jugador1.sets + 1;
-		jugador1.set[nroset] = jugador1.games+1;
-		reproducirAudio(audiogame)
+		jugador1.set[nroset] = jugador1.games + 1;
+		reproducirAudio(audiogame);
 		jugador2.set[nroset] = jugador2.games;
 		nroset += 1;
 		t_iebreak = false;
@@ -215,8 +221,8 @@ function tiebreak() {
 	if (jugador2.ptiebreak == 7 && jugador1.ptiebreak <= 5) {
 		console.log("jugador 2 gana el tiebreak");
 		jugador1.set[nroset] = jugador1.games;
-		jugador2.set[nroset] = jugador2.games+1;
-		reproducirAudio(audiogame)
+		jugador2.set[nroset] = jugador2.games + 1;
+		reproducirAudio(audiogame);
 		nroset += 1;
 		jugador2.sets = jugador2.sets + 1;
 		t_iebreak = false;
@@ -228,8 +234,8 @@ function tiebreak() {
 		jugador1.ptiebreak >= 5 &&
 		jugador2.ptiebreak >= 5
 	) {
-		jugador1.set[nroset] = jugador1.games+1;
-		reproducirAudio(audiogame)
+		jugador1.set[nroset] = jugador1.games + 1;
+		reproducirAudio(audiogame);
 		jugador2.set[nroset] = jugador2.games;
 		nroset += 1;
 		jugador1.sets = jugador1.sets + 1;
@@ -246,8 +252,8 @@ function tiebreak() {
 	) {
 		jugador1.sets = jugador1.sets + 1;
 		jugador1.set[nroset] = jugador1.games;
-		jugador2.set[nroset] = jugador2.games+1;
-		reproducirAudio(audiogame)
+		jugador2.set[nroset] = jugador2.games + 1;
+		reproducirAudio(audiogame);
 		nroset += 1;
 		jugador2.sets = jugador2.sets + 1;
 		game = true;
@@ -255,7 +261,7 @@ function tiebreak() {
 		reset();
 		console.log("gano el set el jugador2");
 	}
-	match()
+	match();
 	cambiodelado();
 	mostrar_resultado();
 }
@@ -275,54 +281,58 @@ function service() {
 	}
 }
 
-function mostrarYDesaparecer(informacion,nombre) {
-    // Muestra el contenido en el elemento
-    document.getElementById("informacion").innerHTML = informacion + nombre;
+function mostrarYDesaparecer(informacion, nombre) {
+	// Muestra el contenido en el elemento
+	document.getElementById("informacion").innerHTML = informacion + nombre;
 
-    // Después de 2 segundos, borra el contenido del elemento
-    setTimeout(function() {
+	// Después de 2 segundos, borra el contenido del elemento
+	setTimeout(function () {
 		document.getElementById("informacion").hidden = false;
-        document.getElementById("informacion").innerHTML = "";
-    }, 2000); // 2000 milisegundos = 2 segundos
+		document.getElementById("informacion").innerHTML = "";
+	}, 2000); // 2000 milisegundos = 2 segundos
 }
 
 function setpoint() {
-
 	if (
-		jugador1.games >= 5 &&
-		jugador2.games < jugador1.games &&
-		jugador1.ijugador == 3 &&
-		jugador2.ijugador < jugador1.ijugador || jugador1.ptiebreak >= 6 && jugador2.ptiebreak < jugador1.ptiebreak
+		(jugador1.games >= 5 &&
+			jugador2.games < jugador1.games &&
+			jugador1.ijugador == 3 &&
+			jugador2.ijugador < jugador1.ijugador) ||
+		(jugador1.ptiebreak >= 6 && jugador2.ptiebreak < jugador1.ptiebreak)
 	) {
-		if (cantSets == 3 && jugador1.sets ==1 || cantSets == 5 && jugador1.sets ==2) {
-			mostrarYDesaparecer("Match Point: ",jugador1.nombre)
-		}		else{
-			mostrarYDesaparecer("Set point ",jugador1.nombre )
+		if (
+			(cantSets == 3 && jugador1.sets == 1) ||
+			(cantSets == 5 && jugador1.sets == 2)
+		) {
+			mostrarYDesaparecer("Match Point: ", jugador1.nombre);
+		} else {
+			mostrarYDesaparecer("Set point ", jugador1.nombre);
 		}
 	}
 	if (
-		jugador2.games >= 5 &&
-		jugador1.games < jugador2.games &&
-		jugador2.ijugador == 3 &&
-		jugador1.ijugador < jugador2.ijugador || jugador2.ptiebreak >= 6 && jugador1.ptiebreak < jugador2.ptiebreak
+		(jugador2.games >= 5 &&
+			jugador1.games < jugador2.games &&
+			jugador2.ijugador == 3 &&
+			jugador1.ijugador < jugador2.ijugador) ||
+		(jugador2.ptiebreak >= 6 && jugador1.ptiebreak < jugador2.ptiebreak)
 	) {
-		if (cantSets == 3 && jugador2.sets ==1 || cantSets == 5 && jugador2.sets ==2) {
-			mostrarYDesaparecer("Match Point: ",jugador2.nombre)
-		}
-		else{
-			mostrarYDesaparecer("Set point ",jugador2.nombre )
+		if (
+			(cantSets == 3 && jugador2.sets == 1) ||
+			(cantSets == 5 && jugador2.sets == 2)
+		) {
+			mostrarYDesaparecer("Match Point: ", jugador2.nombre);
+		} else {
+			mostrarYDesaparecer("Set point ", jugador2.nombre);
 		}
 	}
 }
-
-
 
 function cambiodelado() {
 	let sumagame = jugador1.games + jugador2.games;
 	let sumaptiebreak = jugador1.ptiebreak + jugador2.ptiebreak;
 
 	if (sumagame % 2 !== 0 || (sumaptiebreak % 6 == 0 && t_iebreak)) {
-		mostrarYDesaparecer("Cambio de lado", "")
+		mostrarYDesaparecer("Cambio de lado", "");
 	}
 }
 
