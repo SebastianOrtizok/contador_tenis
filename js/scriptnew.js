@@ -61,7 +61,9 @@ function reproducirAudio(audioElement) {
 
 const audioGameSetAndMatch = document.getElementById("audioGameSetAndMatch");
 const audioTiebreak = document.getElementById("audioTiebreak");
-const audioGame = document.getElementById("audioGame");
+const audioMatchPoint = document.getElementById("audioMatchPoint");
+const audioSetPoint = document.getElementById("audioSetPoint");
+
 
 function reset() {
 	jugador1.games = 0;
@@ -115,7 +117,6 @@ function sumagame(jugador) {
 		(jugador1.ijugador == 4 && jugador2.ijugador < 4 && jugador == jugador1)
 	) {
 		jugador1.games += 1;
-		reproducirAudio(audioGame);
 		cambiodelado();
 		service();
 		jugador1.ijugador = -1;
@@ -127,7 +128,6 @@ function sumagame(jugador) {
 		(jugador2.ijugador == 4 && jugador1.ijugador < 4 && jugador == jugador2)
 	) {
 		jugador2.games += 1;
-		reproducirAudio(audioGame);
 		cambiodelado();
 		service();
 		jugador2.ijugador = -1;
@@ -213,7 +213,6 @@ function tiebreak() {
 		console.log("jugador 1 gana el tiebreak");
 		jugador1.sets = jugador1.sets + 1;
 		jugador1.set[nroset] = jugador1.games + 1;
-		reproducirAudio(audioGame);
 		jugador2.set[nroset] = jugador2.games;
 		nroset += 1;
 		t_iebreak = false;
@@ -223,7 +222,6 @@ function tiebreak() {
 		console.log("jugador 2 gana el tiebreak");
 		jugador1.set[nroset] = jugador1.games;
 		jugador2.set[nroset] = jugador2.games + 1;
-		reproducirAudio(audioGame);
 		nroset += 1;
 		jugador2.sets = jugador2.sets + 1;
 		t_iebreak = false;
@@ -236,7 +234,6 @@ function tiebreak() {
 		jugador2.ptiebreak >= 5
 	) {
 		jugador1.set[nroset] = jugador1.games + 1;
-		reproducirAudio(audioGame);
 		jugador2.set[nroset] = jugador2.games;
 		nroset += 1;
 		jugador1.sets = jugador1.sets + 1;
@@ -254,7 +251,6 @@ function tiebreak() {
 		jugador1.sets = jugador1.sets + 1;
 		jugador1.set[nroset] = jugador1.games;
 		jugador2.set[nroset] = jugador2.games + 1;
-		reproducirAudio(audioGame);
 		nroset += 1;
 		jugador2.sets = jugador2.sets + 1;
 		game = true;
@@ -305,8 +301,10 @@ function setpoint() {
 			(cantSets == 3 && jugador1.sets == 1) ||
 			(cantSets == 5 && jugador1.sets == 2)
 		) {
+			reproducirAudio(audioMatchPoint)
 			mostrarYDesaparecer("Match Point: ", jugador1.nombre);
 		} else {
+			reproducirAudio(audioSetPoint)
 			mostrarYDesaparecer("Set point ", jugador1.nombre);
 		}
 	}
@@ -321,8 +319,10 @@ function setpoint() {
 			(cantSets == 3 && jugador2.sets == 1) ||
 			(cantSets == 5 && jugador2.sets == 2)
 		) {
+			reproducirAudio(audioMatchPoint)
 			mostrarYDesaparecer("Match Point: ", jugador2.nombre);
 		} else {
+			reproducirAudio(audioSetPoint)
 			mostrarYDesaparecer("Set point ", jugador2.nombre);
 		}
 	}

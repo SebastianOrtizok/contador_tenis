@@ -141,10 +141,10 @@ margin: 0.5rem 0  0 1rem;
 	top: 10px;
     left: 50%;
     transform: translate(-50%, 0);
-    background-color: rgba(0, 31, 125, 0.681);
 	border-radius: 10px;
 	padding: 0.5rem;
 	color: aliceblue;
+	text-align: center;
 	font-size: 4rem;
 	margin-top: 2rem;
 	/* animation: desvanecer 3s linear 3s forwards; */
