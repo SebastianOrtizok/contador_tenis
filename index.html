@@ -9,19 +9,20 @@
 	<body>
 		<!-- formulario carga nombre de jugadores -->
 		<div id="formulario_jugadores">
-			<label class="nombreJugador1">Nombre Jugador 1:</label>
-			<input type="text" id="nombreJugador1" />
-			<label class="nombreJugador2">Nombre Jugador 2:</label>
-			<input type="text" id="nombreJugador2" />
-			<label class="servicio">Quien saca?</label>
+			<div class="nombres">
+			<input type="text" id="nombreJugador1" placeholder="Nombre Jugador 1:" />
+			<input type="text" id="nombreJugador2" placeholder="Nombre Jugador 2:"/>
+		</div>
+		<div class="servicio">
 			<div class="servicio sorteo">
 				<input type="radio" id="saca1" name="jugadorSaca" value="jugador1" />
-				<label for="saca1">Jugador 1</label>
+				<label for="saca1">Saca Jugador 1</label>
 			</div>
 			<div class="servicio sorteo">
 				<input type="radio" id="saca2" name="jugadorSaca" value="jugador2" />
-				<label for="saca2">Jugador 2</label>
+				<label for="saca2">Saca Jugador 2</label>
 			</div>
+		</div>
 			<div class="sets">
 				<input type="radio" id="sets3" name="sets" value="3" />
 				<label for="saca2">3 sets</label>

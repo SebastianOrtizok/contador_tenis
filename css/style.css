@@ -12,7 +12,8 @@ body {
 #formulario_jugadores{
     background-color: rgba(0, 31, 125, 0.645);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+	flex-wrap: wrap;
 	border-radius: 10px;
     width: 50%;
     margin: 0.3rem auto 0 auto;
@@ -24,15 +25,7 @@ body {
 	color: aliceblue;
 }
 
-#nombreJugador1 {
-	padding: 0.2rem;
-	width: 50%;
-}
 
-#nombreJugador2 {
-	padding: 0.2rem;
-	width: 50%;
-}
 
 .nombreJugador2 {
 	color: aliceblue;
@@ -41,6 +34,8 @@ body {
 .servicio{
 	color: aliceblue;
 	padding:0.3rem;
+	width: 150px;
+
 }
 
 .sets{
@@ -83,11 +78,13 @@ body {
 	margin: 0.5rem;
 }
 
-#muestra_nombre_1{
-    background-color: rgba(255, 255, 255, 0.501);
+#nombreJugador1 {
+	width: 100%;
+	background-color: rgb(198, 255, 177);
 }
-#muestra_nombre_2{
-    background-color: rgba(255, 255, 255, 0.502);
+#nombreJugador2 {
+	width: 100%;
+	background-color: rgb(198, 255, 177);
 }
 
 .jugador2 {
