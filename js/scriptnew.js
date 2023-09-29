@@ -1,3 +1,50 @@
+let saqueParJugador1 = document.getElementById("jugador1sacapar");
+let saqueImparJugador1 = document.getElementById("jugador1sacaimpar");
+let saqueParJugador2 = document.getElementById("jugador2sacapar");
+let saqueImparJugador2 = document.getElementById("jugador2sacaimpar");
+let devolucionParJugador1= document.getElementById("jugador1devuelvepar");
+let devolucionImparJugador1= document.getElementById("jugador1devuelveimpar");
+let devolucionParJugador2= document.getElementById("jugador2devuelvepar");
+let devolucionImparJugador2= document.getElementById("jugador2devuelveimpar");
+
+let saqueParJugador1LadoB = document.getElementById("jugador1sacapar");
+let saqueImparJugador1LadoB = document.getElementById("jugador1sacaimpar");
+let saqueParJugador2LadoB = document.getElementById("jugador2sacapar");
+let saqueImparJugador2LadoB = document.getElementById("jugador2sacaimpar");
+let devolucionParJugador1LadoB = document.getElementById("jugador1devuelvepar");
+let devolucionImparJugador1LadoB = document.getElementById("jugador1devuelveimpar");
+let devolucionParJugador2LadoB = document.getElementById("jugador2devuelvepar");
+let devolucionImparJugador2LadoB = document.getElementById("jugador2devuelveimpar");
+
+
+
+let ladoA = {
+	ladoA : true,
+	sacaParTop : "136px",
+	sacatParLef: "-2px",
+	sacaImparTop : "73px",
+	sacaImparLeft : "-2px",
+	devuelveParTop:"166px",
+	devuelveParLeft:"28px",
+	devuelveImparTop:"43px",
+	devuelveImparLeft:"28px",
+}
+
+let ladoB = {
+	ladoB : false,
+	sacaParTop : "73px",
+	sacatParLef: "452px",
+	sacaImparTop : "73px",
+	sacaImparLeft : "452px",
+	devuelveParTop:"30px",
+	devuelveParLeft:"389px",
+	devuelveImparTop:"161px",
+	devuelveImparLeft:"389px",
+}
+
+
+
+
 let jugador1 = {
 	nombre: "",
 	games: 0,
@@ -6,6 +53,12 @@ let jugador1 = {
 	ptiebreak: 0,
 	ijugador: 0,
 	servicio: false,
+	saquePartop: "136px",
+	saqueImpartop: "73px",
+	saqueLeft: "-2px",
+	devolucionParTop: "166px",
+	devolucionImparTop: "43px",
+	devolucionLeft: "28px",
 };
 
 let jugador2 = {
@@ -16,18 +69,30 @@ let jugador2 = {
 	ptiebreak: 0,
 	ijugador: 0,
 	servicio: false,
+	saquePartop: "73px",
+	saqueImpartop: "136px",
+	saqueLeft: "452px",
+	devolucionParTop: "30px",
+	devolucionImparTop: "161px",
+	devolucionLeft: "389px",
 };
-
+let puntos = [0, 15, 30, 40, "AD"];
+let jugador = "";
+let t_iebreak = false;
+let servicio = "";
+let nroset = 0;
 let cantSets = 0;
+let cont = 0;
+
+
 // Cargar nobres y quien saca
 const inputNombreJugador1 = document.getElementById("nombreJugador1");
 const inputNombreJugador2 = document.getElementById("nombreJugador2");
 const quiensaca1 = document.getElementById("saca1").checked;
 const quiensaca2 = document.getElementById("saca2").checked;
-const tresSets = document.getElementById("sets3").checked;
 const btnCargarNombres = document.getElementById("cargarnombres");
 
-// Asocia un evento al botón de cargar nombres
+// Asocia un evento del botón apara cargar nombres
 btnCargarNombres.addEventListener("click", function () {
 	jugador1.nombre = inputNombreJugador1.value;
 	jugador2.nombre = inputNombreJugador2.value;
@@ -35,25 +100,19 @@ btnCargarNombres.addEventListener("click", function () {
 	jugador2.servicio = document.getElementById("saca2").checked;
 	document.getElementById("formulario_jugadores").style.visibility = "hidden";
 	if (document.getElementById("sets3").checked) {
-		console.log("estoy en 3 sets");
 		cantSets = 3;
 		jugador1.set = [0, 0, 0];
 		jugador2.set = [0, 0, 0];
 	} else {
-		console.log("estoy en 5 sets");
 		cantSets = 5;
 		jugador1.set = [0, 0, 0, 0, 0];
 		jugador2.set = [0, 0, 0, 0, 0];
 	}
-	service();
+	pelotaIndicaSaqueEnCartel();
+
 	mostrar_resultado();
 });
 
-let puntos = [0, 15, 30, 40, "AD"];
-let jugador = "";
-let t_iebreak = false;
-let servicio = "";
-let nroset = 0;
 
 function reproducirAudio(audioElement) {
 	audioElement.play();
@@ -64,6 +123,78 @@ const audioTiebreak = document.getElementById("audioTiebreak");
 const audioMatchPoint = document.getElementById("audioMatchPoint");
 const audioSetPoint = document.getElementById("audioSetPoint");
 
+function situacionDeJuego(situacion) {
+	saqueParJugador1.style.visibility = "hidden";
+	devolucionParJugador2.style.visibility = "hidden";
+	saqueImparJugador1.style.visibility = "hidden"
+	saqueParJugador2.style.visibility = "hidden";
+	saqueImparJugador2.style.visibility = "hidden";
+	devolucionParJugador1.style.visibility = "hidden";
+	devolucionImparJugador1.style.visibility = "hidden";
+	devolucionImparJugador2.style.visibility = "hidden";
+
+	//**  LADO A */
+	//"jugador1SacaPar"
+	if (situacion == 1 ){
+		console.log("Situacion de juego 1 jugador1SacaPar ")
+		saqueParJugador1.style.visibility = "visible";
+		saqueParJugador1.innerHTML= jugador1.nombre
+		devolucionParJugador2.style.visibility = "visible";
+		devolucionParJugador2.innerHTML= jugador2.nombre;
+		saqueImparJugador1.style.visibility = "hidden"
+		saqueParJugador2.style.visibility = "hidden";
+		saqueImparJugador2.style.visibility = "hidden";
+		devolucionParJugador1.style.visibility = "hidden";
+		devolucionImparJugador1.style.visibility = "hidden";
+		devolucionImparJugador2.style.visibility = "hidden";
+	}
+//"jugador1SacaImpar"
+	if (situacion == 2){
+		console.log("Situacion de juego 2 jugador1SacaImpar ")
+		saqueImparJugador1.style.visibility = "visible"
+		saqueImparJugador1.innerHTML= jugador1.nombre
+		devolucionImparJugador2.style.visibility = "visible";
+		devolucionImparJugador2.innerHTML= jugador2.nombre
+		saqueParJugador1.style.visibility = "hidden";
+		devolucionParJugador2.style.visibility = "hidden";
+		saqueParJugador2.style.visibility = "hidden";
+		saqueImparJugador2.style.visibility = "hidden";
+		devolucionParJugador1.style.visibility = "hidden";
+		devolucionImparJugador1.style.visibility = "hidden";
+	}
+
+//"jugador1DevuelvePar"
+	if (situacion == 3 ){
+		console.log("Situacion de juego 3 jugador1DevuelvePar ")
+		saqueParJugador2.style.visibility = "visible";
+		saqueParJugador2.innerHTML= jugador2.nombre
+		devolucionParJugador1.style.visibility = "visible";
+		devolucionParJugador1.innerHTML= jugador1.nombre
+		saqueImparJugador1.style.visibility = "hidden"
+		devolucionImparJugador2.style.visibility = "hidden";
+		saqueParJugador1.style.visibility = "hidden";
+		devolucionParJugador2.style.visibility = "hidden";
+		saqueImparJugador2.style.visibility = "hidden";
+		devolucionImparJugador1.style.visibility = "hidden";
+	}
+
+	//"jugador1DevuelveImpar"
+
+	if (situacion == 4){
+		console.log("Situacion de juego 4 jugador1DevuelveImpar ")
+		devolucionImparJugador1.style.visibility = "visible";
+		devolucionImparJugador1.innerHTML= jugador1.nombre
+		saqueImparJugador2.style.visibility = "visible";
+		saqueImparJugador2.innerHTML= jugador2.nombre
+		saqueParJugador2.style.visibility = "hidden";
+		devolucionParJugador1.style.visibility = "hidden";
+		saqueImparJugador1.style.visibility = "hidden"
+		devolucionImparJugador2.style.visibility = "hidden";
+		saqueParJugador1.style.visibility = "hidden";
+		devolucionParJugador2.style.visibility = "hidden";
+	}
+
+}
 
 function reset() {
 	jugador1.games = 0;
@@ -75,14 +206,13 @@ function reset() {
 }
 
 // puntos jugador 1 **********************************
-
 const boton1 = document.getElementById("punto_jugador_1");
 boton1.addEventListener("click", function () {
 	jugador = jugador1;
 	if (t_iebreak) {
-		tiebreak(jugador);
+		tiebreak(); //borre jugador antes era tiebreak(jugador)
 	} else {
-		// sumagame(jugador);
+		deQueLadoSaco();
 		sumapunto(jugador);
 	}
 	mostrar_resultado();
@@ -95,8 +225,10 @@ boton2.addEventListener("click", function () {
 	if (t_iebreak) {
 		tiebreak(jugador);
 	} else {
+		deQueLadoSaco();
 		sumapunto(jugador);
 	}
+
 	mostrar_resultado();
 });
 
@@ -111,16 +243,26 @@ function sumapunto(jugador) {
 
 //  function Sumar games
 function sumagame(jugador) {
-	console.log(jugador.ijugador);
 	if (
 		(jugador1.ijugador == 3 && jugador2.ijugador < 3 && jugador == jugador1) ||
 		(jugador1.ijugador == 4 && jugador2.ijugador < 4 && jugador == jugador1)
 	) {
 		jugador1.games += 1;
-		cambiodelado();
-		service();
+		if (jugador1.servicio) {
+			jugador1.servicio=false;
+			jugador2.servicio=true;
+			situacionDeJuego(3)
+			pelotaIndicaSaqueEnCartel()
+		} else {
+			jugador1.servicio=true;
+			jugador2.servicio=false;
+			situacionDeJuego(1)
+			pelotaIndicaSaqueEnCartel()
+		}
+
 		jugador1.ijugador = -1;
 		jugador2.ijugador = 0;
+		cambiodelado();
 	}
 
 	if (
@@ -128,10 +270,18 @@ function sumagame(jugador) {
 		(jugador2.ijugador == 4 && jugador1.ijugador < 4 && jugador == jugador2)
 	) {
 		jugador2.games += 1;
-		cambiodelado();
-		service();
+		if (jugador1.servicio) {
+			jugador1.servicio=false;
+			jugador2.servicio=true;
+			situacionDeJuego(1)
+			pelotaIndicaSaqueEnCartel()
+		} else {
+			situacionDeJuego(3)
+			pelotaIndicaSaqueEnCartel()
+		}
 		jugador2.ijugador = -1;
 		jugador1.ijugador = 0;
+		cambiodelado();
 	}
 	sumaset();
 }
@@ -204,27 +354,34 @@ function ventajaiguales() {
 }
 
 // TIE-BRAK****************
+
+let cambiarSaque = 0;
 function tiebreak() {
+	if (cambiarSaque==0) {
+		deQueLadoSaco();
+		cambiarSaque=1
+	}
 	jugador.ptiebreak = jugador.ptiebreak + 1;
+	deQueLadoSaco();
 	mostrar_resultado();
 	setpoint();
 
 	if (jugador1.ptiebreak == 7 && jugador2.ptiebreak <= 5) {
-		console.log("jugador 1 gana el tiebreak");
 		jugador1.sets = jugador1.sets + 1;
 		jugador1.set[nroset] = jugador1.games + 1;
 		jugador2.set[nroset] = jugador2.games;
 		nroset += 1;
 		t_iebreak = false;
+		pelotaIndicaSaqueEnCartel()
 		reset();
 	}
 	if (jugador2.ptiebreak == 7 && jugador1.ptiebreak <= 5) {
-		console.log("jugador 2 gana el tiebreak");
 		jugador1.set[nroset] = jugador1.games;
 		jugador2.set[nroset] = jugador2.games + 1;
 		nroset += 1;
 		jugador2.sets = jugador2.sets + 1;
 		t_iebreak = false;
+		pelotaIndicaSaqueEnCartel()
 		reset();
 	}
 
@@ -239,8 +396,8 @@ function tiebreak() {
 		jugador1.sets = jugador1.sets + 1;
 		game = true;
 		t_iebreak = false;
+		pelotaIndicaSaqueEnCartel()
 		reset();
-		console.log("gano el set el jugador1");
 	}
 
 	if (
@@ -255,28 +412,14 @@ function tiebreak() {
 		jugador2.sets = jugador2.sets + 1;
 		game = true;
 		t_iebreak = false;
+		pelotaIndicaSaqueEnCartel()
 		reset();
-		console.log("gano el set el jugador2");
 	}
 	match();
 	cambiodelado();
 	mostrar_resultado();
 }
 
-// Funcion Servicio
-function service() {
-	if (jugador1.servicio == true) {
-		jugador1.servicio = false;
-		jugador2.servicio = true;
-		document.getElementById("muestra_servicio_1").style.visibility = "visible";
-		document.getElementById("muestra_servicio_2").style.visibility = "hidden";
-	} else if (jugador1.servicio == false) {
-		jugador1.servicio = true;
-		jugador2.servicio = false;
-		document.getElementById("muestra_servicio_2").style.visibility = "visible";
-		document.getElementById("muestra_servicio_1").style.visibility = "hidden";
-	}
-}
 
 function mostrarYDesaparecer(informacion, nombre) {
 	// Muestra el contenido en el elemento
@@ -301,10 +444,10 @@ function setpoint() {
 			(cantSets == 3 && jugador1.sets == 1) ||
 			(cantSets == 5 && jugador1.sets == 2)
 		) {
-			reproducirAudio(audioMatchPoint)
+			reproducirAudio(audioMatchPoint);
 			mostrarYDesaparecer("Match Point: ", jugador1.nombre);
 		} else {
-			reproducirAudio(audioSetPoint)
+			reproducirAudio(audioSetPoint);
 			mostrarYDesaparecer("Set point ", jugador1.nombre);
 		}
 	}
@@ -319,26 +462,55 @@ function setpoint() {
 			(cantSets == 3 && jugador2.sets == 1) ||
 			(cantSets == 5 && jugador2.sets == 2)
 		) {
-			reproducirAudio(audioMatchPoint)
+			reproducirAudio(audioMatchPoint);
 			mostrarYDesaparecer("Match Point: ", jugador2.nombre);
 		} else {
-			reproducirAudio(audioSetPoint)
+			reproducirAudio(audioSetPoint);
 			mostrarYDesaparecer("Set point ", jugador2.nombre);
 		}
 	}
 }
 
 function cambiodelado() {
-	let sumagame = jugador1.games + jugador2.games;
-	let sumaptiebreak = jugador1.ptiebreak + jugador2.ptiebreak;
+    let sumagame = jugador1.games + jugador2.games;
+    let sumaptiebreak = jugador1.ptiebreak + jugador2.ptiebreak;
+    if (sumagame % 2 !== 0 || (sumaptiebreak % 6 == 0 && t_iebreak)) {
+        mostrarYDesaparecer("Cambio de lado", "");
 
-	if (sumagame % 2 !== 0 || (sumaptiebreak % 6 == 0 && t_iebreak)) {
-		mostrarYDesaparecer("Cambio de lado", "");
-	}
+		// Cambio de lado en el lado A
+        if (ladoA.ladoA==true) {
+			console.log("Estoy dentro de lado A")
+            saqueParJugador2.setAttribute("class", "ladoAsp");
+			saqueImparJugador2.setAttribute("class", "ladoAsi");
+            saqueParJugador1.setAttribute("class", "ladoBsp");
+			saqueImparJugador1.setAttribute("class", "ladoBsi");
+
+			devolucionParJugador2.setAttribute("class", "ladoAdp")
+            devolucionImparJugador2.setAttribute("class", "ladoAdi")
+            devolucionParJugador1.setAttribute("class", "ladoBdp")
+            devolucionImparJugador1.setAttribute("class", "ladoBdi")
+			ladoA.ladoA=false
+
+        } else if (ladoA.ladoA==false){
+            // Cambio de lado en el lado B (derecho)
+			console.log("Estoy dentro de lado B")
+            saqueParJugador2.setAttribute("class", "ladoBsp")
+			saqueImparJugador2.setAttribute("class", "ladoBsi")
+            saqueParJugador1.setAttribute("class", "ladoAsp")
+			saqueImparJugador1.setAttribute("class", "ladoAsi")
+
+
+            devolucionParJugador2.setAttribute("class", "ladoBdp")
+            devolucionImparJugador2.setAttribute("class", "ladoBdi")
+            devolucionParJugador1.setAttribute("class", "ladoAdp")
+            devolucionImparJugador1.setAttribute("class", "ladoAdi")
+			ladoA.ladoA=true
+        }
+    }
+
 }
 
 // MOSTRAR EL RESULTADO ****************
-
 function mostrar_resultado() {
 	document.getElementById("muestra_nombre_1").innerHTML = jugador1.nombre;
 	document.getElementById("muestra_tiebreak_1").innerHTML = jugador1.ptiebreak;
@@ -387,3 +559,109 @@ function mostrar_resultado() {
 			jugador2.games + "    " + puntos[jugador2.ijugador];
 	}
 }
+
+
+// Funcion muestra la pelota de quie saca
+function pelotaIndicaSaqueEnCartel() {
+    if (jugador1.servicio == true) {
+		situacionDeJuego(1)
+        document.getElementById("muestra_servicio_1").style.visibility = "visible";
+        document.getElementById("muestra_servicio_2").style.visibility = "hidden";
+		jugador1.servicio==false
+		jugador2.servicio==true
+
+    } else if (jugador1.servicio == false) {
+		situacionDeJuego(3)
+        document.getElementById("muestra_servicio_1").style.visibility = "hidden";
+        document.getElementById("muestra_servicio_2").style.visibility = "visible";
+		jugador1.servicio==true
+		jugador2.servicio==false
+    }
+}
+
+function deQueLadoSaco() {
+	// Servicio jugador 1
+	if (jugador1.servicio) {
+		if (saqueParJugador1.style.visibility == "hidden") {
+			situacionDeJuego(1)
+
+		} else if (saqueParJugador1.style.visibility == "visible") {
+		situacionDeJuego(2)
+		}
+	}
+	// Servicio jugador 2
+	if (jugador2.servicio) {
+
+		if (saqueParJugador2.style.visibility == "hidden") {
+			situacionDeJuego(3)
+
+		} else if (saqueParJugador2.style.visibility == "visible") {
+			situacionDeJuego(4)
+		}
+	}
+
+	if (t_iebreak) {
+			cont= jugador1.ptiebreak + jugador2.ptiebreak
+		 if (jugador1.servicio) {
+			 if (cont == 0){
+			 	console.log("estoy el primer punto del tiebreack")
+			 	saqueImparJugador2.style.visibility = "hidden";
+			 	saqueParJugador2.style.visibility = "hidden";
+			 	saqueParJugador1.style.visibility = "visible";
+			 	saqueImparJugador1.style.visibility = "hidden";
+				 devolucionParJugador2.style.visibility="visible"
+				 devolucionImparJugador2.style.visibility="hidden"
+				 jugador2.servicio=true;
+				 jugador1.servicio=false;
+			 }
+			if ((cont % 2) == 0 & cont!=0) {
+				console.log("estoy en bloque 1")
+				saqueImparJugador2.style.visibility = "hidden";
+				saqueParJugador2.style.visibility = "hidden";
+				saqueParJugador1.style.visibility = "visible";
+				saqueImparJugador1.style.visibility = "hidden";
+				jugador2.servicio=true;
+				jugador1.servicio=false;
+			} 	else if ((cont % 2) !== 0){
+				console.log("estoy en bloque 2")
+				jugador2.servicio=false;
+				jugador1.servicio=true;
+				saqueImparJugador2.style.visibility = "hidden";
+				saqueParJugador2.style.visibility = "hidden";
+				saqueParJugador1.style.visibility = "hidden";
+				saqueImparJugador1.style.visibility = "visible";
+			}
+
+		} else if (jugador2.servicio) {
+			if (cont == 0){
+				console.log("estoy el primer punto del tiebreack")
+				saqueImparJugador2.style.visibility = "hidden";
+				saqueParJugador2.style.visibility = "hidden";
+				saqueParJugador1.style.visibility = "visible";
+				saqueImparJugador1.style.visibility = "hidden";
+				jugador1.servicio=true;
+				jugador2.servicio=false;
+			}
+			if  ((cont % 2) == 0 & cont!=0) {
+				console.log("estoy en bloque 3")
+				saqueImparJugador1.style.visibility = "hidden";
+				saqueParJugador1.style.visibility = "hidden";
+				saqueParJugador2.style.visibility = "visible";
+				saqueImparJugador2.style.visibility = "hidden";
+				jugador1.servicio=true;
+				jugador2.servicio=false;
+            } else if ((cont % 2) !== 0){
+				console.log("estoy en bloque 4")
+				jugador2.servicio=true;
+				jugador1.servicio=false;
+				saqueImparJugador2.style.visibility = "visible";
+				saqueParJugador2.style.visibility = "hidden";
+				saqueParJugador1.style.visibility = "hidden";
+				saqueImparJugador1.style.visibility = "hidden";
+			}
+			} 
+
+		}	
+
+} 	
+		

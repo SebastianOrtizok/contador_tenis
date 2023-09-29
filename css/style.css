@@ -5,12 +5,19 @@
 }
 
 body {
-	background-image: url(../img/blue-tennis-court.jpg);
-	background-size: 95%;
+	background-color: rgb(43,99,174);
+}
+
+.cancha{
+	position: absolute;
+	width: 100%;
+	top:1px;
+	margin: auto;
+	z-index: -1;
 }
 
 #formulario_jugadores{
-    background-color: rgba(0, 31, 125, 0.645);
+	background-color: rgba(0, 31, 125, 0.645);
     display: flex;
     flex-direction: row;
 	flex-wrap: wrap;
@@ -35,7 +42,7 @@ body {
 	color: aliceblue;
 	padding:0.3rem;
 	width: 150px;
-
+	
 }
 
 .sets{
@@ -44,7 +51,7 @@ body {
 }
 
 .container {
-    display: flex;
+	display: flex;
     flex-direction: column;
     background-color: rgba(0, 31, 125, 0.681);
     margin: 0.2rem auto;
@@ -155,6 +162,119 @@ margin: 0.5rem 0  0 1rem;
 	}
   } */
 
+.ladoAsp {
+    top: 174px;
+    left: -2px;
+}
+
+ #jugador1sacapar {
+	visibility: hidden;
+    position: fixed;
+	font-size: 2rem;
+	color: rgb(255, 0, 0);
+    width: 10%;
+    height: 10%;
+
+}
+
+.ladoAsi {
+    top: 73px;
+    left: -2px;
+}
+
+#jugador1sacaimpar {
+	visibility: hidden;
+    position: fixed;
+	font-size: 2rem;
+	color: rgb(255, 0, 0);
+    width: 10%;
+    height: 10%;
+}
+
+.ladoBsp {
+    top: 93px;
+    left: 427px;
+}
+
+#jugador2sacapar {
+    position: fixed;
+	visibility: hidden;
+	font-size: 2rem;
+	color: rgb(255, 255, 255);
+	width: 10%;
+    height: 10%;
+}
+
+.ladoBsi {
+    top: 175px;
+    left: 422px;
+}
+
+#jugador2sacaimpar {
+    position: fixed;
+	visibility: hidden;
+	font-size: 2rem;
+	color: rgb(255, 255, 255);
+    width: 10%;
+    height: 10%;
+}
+
+.ladoAdp{
+    top: 184px;
+    left: 97px;
+}
+
+#jugador1devuelvepar {
+	visibility: hidden;
+    position: fixed;
+	font-size: 2rem;
+	color: rgb(255, 0, 0);
+    width: 10%;
+    height: 10%;
+
+}
+
+.ladoAdi {
+    top: 87px;
+    left: 122px;
+}
+
+#jugador1devuelveimpar {
+	visibility: hidden;
+	position: fixed;
+	font-size: 2rem;
+	color: rgb(255, 0, 0);
+    width: 10%;
+    height: 10%;
+}
+
+.ladoBdp {
+    top: 78px;
+    left: 321px;
+}
+
+#jugador2devuelvepar {
+	visibility: hidden;
+    position: fixed;
+	font-size: 2rem;
+	color: rgb(255, 255, 255);
+    width: 10%;
+    height: 10%;
+}
+
+.ladoBdi {
+    top: 186px;
+    left: 329px;
+}
+
+#jugador2devuelveimpar {
+    visibility: hidden;
+    position: fixed;
+	font-size: 2rem;
+	color: rgb(255, 255, 255);
+    width: 10%;
+    height: 10%;
+}
 
 
 
@@ -174,6 +294,8 @@ margin: 0.5rem 0  0 1rem;
 		background-color: rgb(198, 255, 177);
 	}
 	.container {
+		position: fixed;
+		top: 300px;
 		margin: 0.2rem auto;
 		width: 100%;
 		border-radius: 10px;
