@@ -8,10 +8,11 @@ body {
 	background-color: rgb(43,99,174);
 }
 
-.cancha{
-	position: absolute;
-    width: 734px;
-    top: -26px;
+
+.cancha {
+    position: absolute;
+    max-width: 430px;
+    top: 18px;
     margin: auto;
     z-index: -1;
 }
@@ -22,8 +23,7 @@ body {
     flex-direction: row;
 	flex-wrap: wrap;
 	border-radius: 10px;
-    width: 50%;
-    margin: 0.3rem auto 0 auto;
+    max-width: 430px;
     padding: 1rem;
 	align-items: center;
 }
@@ -42,24 +42,24 @@ body {
 	color: aliceblue;
 	padding:0.3rem;
 	width: 150px;
+	font-size: 1.2rem;
 	
 }
 
 .sets{
 	color: aliceblue;
 	padding:0.3rem;
+	font-size: 1.3rem;
 }
 
 .container {
 	position: fixed;
 	display: flex;
     flex-direction: column;
-	bottom: 10px;
+    bottom: 54px;
     background-color: rgba(0, 31, 125, 0.681);
-	margin: 0.2rem auto;
-	width: 100%;
+    width: 430px;
 	border-radius: 10px;
-	padding: 0rem;
 }
 
 .titulos{
@@ -78,6 +78,7 @@ body {
 	grid-template-columns: 10% 25% 30% 25% 10%;
     background-color: rgb(198, 255, 177);
     align-items: center;
+	height: 50px;
 }
 
 .muestra_nombre {
@@ -89,10 +90,13 @@ body {
 
 #nombreJugador1 {
 	width: 100%;
+	font-size: 1.5rem;
 	background-color: rgb(198, 255, 177);
 }
 #nombreJugador2 {
 	width: 100%;
+	font-size: 1.5rem;
+	margin-top: 0.5rem;
 	background-color: rgb(198, 255, 177);
 }
 
@@ -101,12 +105,13 @@ body {
 	grid-template-columns: 10% 25% 30% 25% 10%;
     background-color: rgb(198, 255, 177);
     align-items: center;
+	height: 50px;
 }
 
 .flex {
 	display: flex;
 	flex-direction: column;
-	margin: 1rem;
+    margin: 0.5rem;
 	justify-items: center;
     align-items: stretch;
 }
@@ -120,31 +125,33 @@ body {
 }
 
 div .muestra_puntos {
-	padding: 1rem;
+	padding: 0 1rem;
 	font-size: 2rem;
 	height: auto;
 	background-color: rgb(198, 255, 177);
 }
 
 .flex img {
-	width: 50px;
-	height: 50px;
+    width: 40px;
+    height: 40px;
+    padding: 0.3rem;
 }
 
 button {
 	width: 220px;
 	padding: 0.5rem;
+	width: 150px;
 }
 
 .botones_puntos{
-display: inline;
-margin: 0.5rem 0  0 1rem;
+    display: inline;
+    margin: 0 auto 0.5rem;
 }
 
 
 .informacion{
 	position: fixed;
-	 bottom: 10px;
+	 top: 10px;
     left: 50%;
     transform: translate(-50%, 0);
 	border-radius: 10px;
@@ -165,8 +172,8 @@ margin: 0.5rem 0  0 1rem;
   } */
 
   .ladoAsp {
-    top: 268px;
-    left: 32px;
+    top: 197px;
+    left: 14px;
 }
 
  #jugador1sacapar {
@@ -180,13 +187,13 @@ margin: 0.5rem 0  0 1rem;
 }
 
 .ladoAsi {
-    top: 167px;
-    left: 29px;
+    top: 107px;
+    left: 4px;
 }
 
 #jugador1sacaimpar {
 	visibility: hidden;
-    position: fixed;
+	position: absolute;
 	font-size: 2rem;
 	color: rgb(255, 0, 0);
     width: 10%;
@@ -194,12 +201,12 @@ margin: 0.5rem 0  0 1rem;
 }
 
 .ladoBsp {
-    top: 157px;
-    left: 608px;
+    top: 102px;
+    left: 334px;
 }
 
 #jugador2sacapar {
-    position: fixed;
+	position: absolute;
 	visibility: hidden;
 	font-size: 2rem;
 	color: rgb(255, 255, 255);
@@ -208,12 +215,12 @@ margin: 0.5rem 0  0 1rem;
 }
 
 .ladoBsi {
-    top: 274px;
-    left: 610px;
+    top: 177px;
+    left: 337px;
 }
 
 #jugador2sacaimpar {
-    position: fixed;
+	position: absolute;
 	visibility: hidden;
 	font-size: 2rem;
 	color: rgb(255, 255, 255);
@@ -222,13 +229,13 @@ margin: 0.5rem 0  0 1rem;
 }
 
 .ladoAdp {
-    top: 288px;
-    left: 139px;
+	top: 195px;
+    left: 90px;
 }
 
 #jugador1devuelvepar {
 	visibility: hidden;
-    position: fixed;
+	position: absolute;
 	font-size: 2rem;
 	color: rgb(255, 0, 0);
     width: 10%;
@@ -237,13 +244,13 @@ margin: 0.5rem 0  0 1rem;
 }
 
 .ladoAdi {
-    top: 149px;
-    left: 147px;
+	top: 98px;
+    left: 87px;
 }
 
 #jugador1devuelveimpar {
 	visibility: hidden;
-	position: fixed;
+	position: absolute;
 	font-size: 2rem;
 	color: rgb(255, 0, 0);
     width: 10%;
@@ -251,13 +258,13 @@ margin: 0.5rem 0  0 1rem;
 }
 
 .ladoBdp {
-    top: 138px;
-    left: 505px;
+    top: 104px;
+    left: 298px;
 }
 
 #jugador2devuelvepar {
 	visibility: hidden;
-    position: fixed;
+	position: absolute;
 	font-size: 2rem;
 	color: rgb(255, 255, 255);
     width: 10%;
@@ -265,57 +272,15 @@ margin: 0.5rem 0  0 1rem;
 }
 
 .ladoBdi {
-    top: 297px;
-    left: 496px;
+    top: 201px;
+    left: 284px;
 }
 
 #jugador2devuelveimpar {
     visibility: hidden;
-    position: fixed;
+	position: absolute;
 	font-size: 2rem;
 	color: rgb(255, 255, 255);
     width: 10%;
     height: 10%;
-}
-
-
-
-@media only screen and (max-width: 900px) {
-	#formulario_jugadores {
-		width: 100%;
-		margin: 0rem auto;
-		padding: 0.5 rem;
-		align-items: center;
-	}
-	#nombreJugador1 {
-		width: 100%;
-		background-color: rgb(198, 255, 177);
-	}
-	#nombreJugador2 {
-		width: 100%;
-		background-color: rgb(198, 255, 177);
-	}
-	/* .container {
-		position: fixed;
-		top: 300px;
-		margin: 0.2rem auto;
-		width: 100%;
-		border-radius: 10px;
-		padding: 0rem;
-	} */
-	/* .flex {
-		margin: 0.3rem;
-	}
-	div .muestra_puntos {
-
-		font-size: 1.5rem;
-		height: auto;
-		background-color: rgb(198, 255, 177);
-	}
-	.flex img {
-		width: 25px;
-		height: 25px;
-		padding: 0px;
-		margin: auto;
-	} */
 }
