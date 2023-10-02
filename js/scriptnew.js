@@ -124,22 +124,22 @@ const audioMatchPoint = document.getElementById("audioMatchPoint");
 const audioSetPoint = document.getElementById("audioSetPoint");
 
 function situacionDeJuego(situacion) {
-	saqueParJugador1.style.visibility = "hidden";
-	devolucionParJugador2.style.visibility = "hidden";
-	saqueImparJugador1.style.visibility = "hidden"
-	saqueParJugador2.style.visibility = "hidden";
-	saqueImparJugador2.style.visibility = "hidden";
-	devolucionParJugador1.style.visibility = "hidden";
-	devolucionImparJugador1.style.visibility = "hidden";
-	devolucionImparJugador2.style.visibility = "hidden";
+	// saqueParJugador1.style.visibility = "hidden";
+	// devolucionParJugador2.style.visibility = "hidden";
+	// saqueImparJugador1.style.visibility = "hidden"
+	// saqueParJugador2.style.visibility = "hidden";
+	// saqueImparJugador2.style.visibility = "hidden";
+	// devolucionParJugador1.style.visibility = "hidden";
+	// devolucionImparJugador1.style.visibility = "hidden";
+	// devolucionImparJugador2.style.visibility = "hidden";
 
 	//**  LADO A */
 	//"jugador1SacaPar"
 	if (situacion == 1 ){
 		saqueParJugador1.style.visibility = "visible";
-		saqueParJugador1.innerHTML= jugador1.nombre
+		saqueParJugador1.innerHTML = jugador1.nombre.substring(0, 5);
 		devolucionParJugador2.style.visibility = "visible";
-		devolucionParJugador2.innerHTML= jugador2.nombre;
+		devolucionParJugador2.innerHTML= jugador2.nombre.substring(0, 5);;
 		saqueImparJugador1.style.visibility = "hidden"
 		saqueParJugador2.style.visibility = "hidden";
 		saqueImparJugador2.style.visibility = "hidden";
@@ -150,9 +150,9 @@ function situacionDeJuego(situacion) {
 //"jugador1SacaImpar"
 	if (situacion == 2){
 		saqueImparJugador1.style.visibility = "visible"
-		saqueImparJugador1.innerHTML= jugador1.nombre
+		saqueImparJugador1.innerHTML= jugador1.nombre.substring(0, 5);
 		devolucionImparJugador2.style.visibility = "visible";
-		devolucionImparJugador2.innerHTML= jugador2.nombre
+		devolucionImparJugador2.innerHTML= jugador2.nombre.substring(0, 5);
 		saqueParJugador1.style.visibility = "hidden";
 		devolucionParJugador2.style.visibility = "hidden";
 		saqueParJugador2.style.visibility = "hidden";
@@ -164,9 +164,9 @@ function situacionDeJuego(situacion) {
 //"jugador1DevuelvePar"
 	if (situacion == 3 ){
 		saqueParJugador2.style.visibility = "visible";
-		saqueParJugador2.innerHTML= jugador2.nombre
+		saqueParJugador2.innerHTML= jugador2.nombre.substring(0, 5);
 		devolucionParJugador1.style.visibility = "visible";
-		devolucionParJugador1.innerHTML= jugador1.nombre
+		devolucionParJugador1.innerHTML= jugador1.nombre.substring(0, 5);
 		saqueImparJugador1.style.visibility = "hidden"
 		devolucionImparJugador2.style.visibility = "hidden";
 		saqueParJugador1.style.visibility = "hidden";
@@ -179,9 +179,9 @@ function situacionDeJuego(situacion) {
 
 	if (situacion == 4){
 		devolucionImparJugador1.style.visibility = "visible";
-		devolucionImparJugador1.innerHTML= jugador1.nombre
+		devolucionImparJugador1.innerHTML= jugador1.nombre.substring(0, 5);
 		saqueImparJugador2.style.visibility = "visible";
-		saqueImparJugador2.innerHTML= jugador2.nombre
+		saqueImparJugador2.innerHTML= jugador2.nombre.substring(0, 5);
 		saqueParJugador2.style.visibility = "hidden";
 		devolucionParJugador1.style.visibility = "hidden";
 		saqueImparJugador1.style.visibility = "hidden"
