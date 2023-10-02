@@ -23,7 +23,7 @@ body {
     flex-direction: row;
 	flex-wrap: wrap;
 	border-radius: 10px;
-    max-width: 430px;
+    width: 430px;
     padding: 1rem;
 	align-items: center;
 }
@@ -39,10 +39,10 @@ body {
 }
 
 .servicio{
-	color: aliceblue;
-	padding:0.3rem;
-	width: 150px;
-	font-size: 1.2rem;
+    color: aliceblue;
+    padding: 0.3rem;
+    width: 200px;
+    font-size: 1.2rem;
 	
 }
 
