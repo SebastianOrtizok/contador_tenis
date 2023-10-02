@@ -136,7 +136,6 @@ function situacionDeJuego(situacion) {
 	//**  LADO A */
 	//"jugador1SacaPar"
 	if (situacion == 1 ){
-		console.log("Situacion de juego 1 jugador1SacaPar ")
 		saqueParJugador1.style.visibility = "visible";
 		saqueParJugador1.innerHTML= jugador1.nombre
 		devolucionParJugador2.style.visibility = "visible";
@@ -150,7 +149,6 @@ function situacionDeJuego(situacion) {
 	}
 //"jugador1SacaImpar"
 	if (situacion == 2){
-		console.log("Situacion de juego 2 jugador1SacaImpar ")
 		saqueImparJugador1.style.visibility = "visible"
 		saqueImparJugador1.innerHTML= jugador1.nombre
 		devolucionImparJugador2.style.visibility = "visible";
@@ -165,7 +163,6 @@ function situacionDeJuego(situacion) {
 
 //"jugador1DevuelvePar"
 	if (situacion == 3 ){
-		console.log("Situacion de juego 3 jugador1DevuelvePar ")
 		saqueParJugador2.style.visibility = "visible";
 		saqueParJugador2.innerHTML= jugador2.nombre
 		devolucionParJugador1.style.visibility = "visible";
@@ -181,7 +178,6 @@ function situacionDeJuego(situacion) {
 	//"jugador1DevuelveImpar"
 
 	if (situacion == 4){
-		console.log("Situacion de juego 4 jugador1DevuelveImpar ")
 		devolucionImparJugador1.style.visibility = "visible";
 		devolucionImparJugador1.innerHTML= jugador1.nombre
 		saqueImparJugador2.style.visibility = "visible";
@@ -210,7 +206,7 @@ const boton1 = document.getElementById("punto_jugador_1");
 boton1.addEventListener("click", function () {
 	jugador = jugador1;
 	if (t_iebreak) {
-		tiebreak(); //borre jugador antes era tiebreak(jugador)
+		tiebreak(jugador); //borre jugador antes era tiebreak(jugador)
 	} else {
 		deQueLadoSaco();
 		sumapunto(jugador);
@@ -273,10 +269,12 @@ function sumagame(jugador) {
 		if (jugador1.servicio) {
 			jugador1.servicio=false;
 			jugador2.servicio=true;
-			situacionDeJuego(1)
-			pelotaIndicaSaqueEnCartel()
-		} else {
 			situacionDeJuego(3)
+			pelotaIndicaSaqueEnCartel()
+		} else {			
+			jugador1.servicio=true;
+			jugador2.servicio=false;
+			situacionDeJuego(1)
 			pelotaIndicaSaqueEnCartel()
 		}
 		jugador2.ijugador = -1;
@@ -362,6 +360,7 @@ function tiebreak() {
 		cambiarSaque=1
 	}
 	jugador.ptiebreak = jugador.ptiebreak + 1;
+	pelotaIndicaSaqueEnCartel()
 	deQueLadoSaco();
 	mostrar_resultado();
 	setpoint();
@@ -479,7 +478,6 @@ function cambiodelado() {
 
 		// Cambio de lado en el lado A
         if (ladoA.ladoA==true) {
-			console.log("Estoy dentro de lado A")
             saqueParJugador2.setAttribute("class", "ladoAsp");
 			saqueImparJugador2.setAttribute("class", "ladoAsi");
             saqueParJugador1.setAttribute("class", "ladoBsp");
@@ -493,7 +491,6 @@ function cambiodelado() {
 
         } else if (ladoA.ladoA==false){
             // Cambio de lado en el lado B (derecho)
-			console.log("Estoy dentro de lado B")
             saqueParJugador2.setAttribute("class", "ladoBsp")
 			saqueImparJugador2.setAttribute("class", "ladoBsi")
             saqueParJugador1.setAttribute("class", "ladoAsp")
@@ -580,6 +577,7 @@ function pelotaIndicaSaqueEnCartel() {
 }
 
 function deQueLadoSaco() {
+	if (!t_iebreak) {
 	// Servicio jugador 1
 	if (jugador1.servicio) {
 		if (saqueParJugador1.style.visibility == "hidden") {
@@ -599,65 +597,42 @@ function deQueLadoSaco() {
 			situacionDeJuego(4)
 		}
 	}
+	}
 
 	if (t_iebreak) {
 			cont= jugador1.ptiebreak + jugador2.ptiebreak
 		 if (jugador1.servicio) {
 			 if (cont == 0){
-			 	console.log("estoy el primer punto del tiebreack")
-			 	saqueImparJugador2.style.visibility = "hidden";
-			 	saqueParJugador2.style.visibility = "hidden";
-			 	saqueParJugador1.style.visibility = "visible";
-			 	saqueImparJugador1.style.visibility = "hidden";
-				 devolucionParJugador2.style.visibility="visible"
-				 devolucionImparJugador2.style.visibility="hidden"
-				 jugador2.servicio=true;
-				 jugador1.servicio=false;
+				console.log("bloque 1 primer saque del tiebreak lado par  saca jugador1 ")
+				situacionDeJuego(1)
+				jugador1.servicio=false
+				jugador2.servicio=true
 			 }
 			if ((cont % 2) == 0 & cont!=0) {
-				console.log("estoy en bloque 1")
-				saqueImparJugador2.style.visibility = "hidden";
-				saqueParJugador2.style.visibility = "hidden";
-				saqueParJugador1.style.visibility = "visible";
-				saqueImparJugador1.style.visibility = "hidden";
-				jugador2.servicio=true;
-				jugador1.servicio=false;
+				console.log("bloque 2 saca jugador1 lado par  ")
+				situacionDeJuego(1)
+				jugador1.servicio=false
+				jugador2.servicio=true
 			} 	else if ((cont % 2) !== 0){
-				console.log("estoy en bloque 2")
-				jugador2.servicio=false;
-				jugador1.servicio=true;
-				saqueImparJugador2.style.visibility = "hidden";
-				saqueParJugador2.style.visibility = "hidden";
-				saqueParJugador1.style.visibility = "hidden";
-				saqueImparJugador1.style.visibility = "visible";
+				console.log("bloque 3 saca jugador1 lado imparpar  ")
+				situacionDeJuego(2)
 			}
 
 		} else if (jugador2.servicio) {
 			if (cont == 0){
-				console.log("estoy el primer punto del tiebreack")
-				saqueImparJugador2.style.visibility = "hidden";
-				saqueParJugador2.style.visibility = "hidden";
-				saqueParJugador1.style.visibility = "visible";
-				saqueImparJugador1.style.visibility = "hidden";
-				jugador1.servicio=true;
-				jugador2.servicio=false;
+				console.log("bloque 4 saca jugador2 lado par  ")
+				situacionDeJuego(3)
+				jugador1.servicio=true
+				jugador2.servicio=false
 			}
 			if  ((cont % 2) == 0 & cont!=0) {
-				console.log("estoy en bloque 3")
-				saqueImparJugador1.style.visibility = "hidden";
-				saqueParJugador1.style.visibility = "hidden";
-				saqueParJugador2.style.visibility = "visible";
-				saqueImparJugador2.style.visibility = "hidden";
-				jugador1.servicio=true;
-				jugador2.servicio=false;
+				console.log("bloque 5 saca jugador2 lado par  ")
+				situacionDeJuego(3)
+				jugador1.servicio=true
+				jugador2.servicio=false
             } else if ((cont % 2) !== 0){
-				console.log("estoy en bloque 4")
-				jugador2.servicio=true;
-				jugador1.servicio=false;
-				saqueImparJugador2.style.visibility = "visible";
-				saqueParJugador2.style.visibility = "hidden";
-				saqueParJugador1.style.visibility = "hidden";
-				saqueImparJugador1.style.visibility = "hidden";
+				console.log("bloque 6 saca jugador2 lado impar  ")
+				situacionDeJuego(4)
 			}
 			} 
 
